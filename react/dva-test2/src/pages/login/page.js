@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Input, Button } from 'antd';
+import axios from 'axios'
 
 class Login extends Component {
   constructor () {
@@ -12,15 +13,35 @@ class Login extends Component {
   componentDidMount () {
   }
   handleLogin () {
-    console.log(this.state)
+    axios.post('http://10.9.28.43:3000/signin', {
+      username: 'asd',
+      password: 'asd'
+    }).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+  handleUsernameChange (event) {
+    this.setState({
+      username: event.target.value
+    })
+  }
+  handlePasswrodChange (event) {
+    this.setState({
+      password: event.target.value
+    })
   }
   render () {
     return (
       <div>
-        <Input placeholder="username" value={this.state.username} />
-        <Input placeholder="password" value={this.state.username} />
+        <Input placeholder="username" value={this.state.username}
+        onChange={this.handleUsernameChange.bind(this)}/>
+        <Input placeholder="password" value={this.state.password}
+        onChange={this.handlePasswrodChange.bind(this)}/>
         <Button
             type="primary"
+            onClick={this.handleLogin.bind(this)}
           >
             Log in
           </Button>
