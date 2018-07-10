@@ -3,6 +3,7 @@ const dbUtils = require('../utils/db-utils')
 const user = {
   async create ( model ) {
     let result = await dbUtils.insertData( 'user_info', model )
+    console.log(result, 'models ???')
     return result
   },
   async getOneByUserNameAndPassword( options ) {

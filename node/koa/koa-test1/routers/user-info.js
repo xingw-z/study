@@ -4,6 +4,7 @@ const userInfoController = require('../controllers/user-info')
 
 router.post('/signup', async (ctx, next) => {
   const result = await userInfoController.signup(ctx)
+  console.log(result, 'routers ???')
   ctx.body = result
 })
 
