@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import { Input, Button } from 'antd';
+import { Input, Button, message } from 'antd';
 import axios from 'axios'
 
-class Login extends Component {
+class Signup extends Component {
   constructor () {
     super()
     this.state = {
@@ -13,11 +13,12 @@ class Login extends Component {
   componentDidMount () {
   }
   handleLogin () {
-    axios.post('http://10.9.28.43:3000/signin', {
+    axios.post('http://10.9.28.43:3000/signup', {
       username: this.state.username,
       password: this.state.password
     }).then(res => {
       console.log(res)
+      this.handleMsg(res.data)
     }).catch(err => {
       console.log(err)
     })
@@ -32,6 +33,13 @@ class Login extends Component {
       password: event.target.value
     })
   }
+  handleMsg (res) {
+    if (res.code === '00') {
+      message.success(res.msg)
+    } else {
+      message.error(res.msg)
+    }
+  }
   render () {
     return (
       <div>
@@ -43,11 +51,11 @@ class Login extends Component {
             type="primary"
             onClick={this.handleLogin.bind(this)}
           >
-            Log in
+            sign up
           </Button>
       </div>
     )
   }
 }
 
-export default Login
+export default Signup

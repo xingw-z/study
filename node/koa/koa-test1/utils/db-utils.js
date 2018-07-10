@@ -15,9 +15,16 @@ let query = function( sql, values ) {
         resolve( err )
       } else {
         connection.query(sql, values, ( err, rows) => {
-
           if ( err ) {
-            reject( err )
+            if (err.code === 'ER_DUP_ENTRY') {
+              resolve( {
+                code: err.errno,
+                msg: '重复的用户名',
+                errCode: err.code
+              } )
+            } else {
+              resolve( err )
+            }
           } else {
             resolve( rows )
           }
@@ -28,9 +35,9 @@ let query = function( sql, values ) {
   })
 }
 
-let insertData = function( table, values ) {
+let insertData = async ( table, values ) => {
   let _sql = "INSERT INTO ?? SET ?"
-  return query( _sql, [ table, values ] )
+  return await query( _sql, [ table, values ] )
 }
 
 module.exports = {

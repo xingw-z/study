@@ -23,6 +23,9 @@ function Header({ location }) {
       <Menu.Item key="/login">
         <Link to="/login"><Icon type="login" />login</Link>
       </Menu.Item>
+      <Menu.Item key="/signup">
+        <Link to="/signup"><Icon type="signup" />signup</Link>
+      </Menu.Item>
       <Menu.Item key="/404">
         <Link to="/404"><Icon type="frown-circle" />404</Link>
       </Menu.Item>
