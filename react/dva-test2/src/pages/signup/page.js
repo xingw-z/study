@@ -13,7 +13,7 @@ class Signup extends Component {
   componentDidMount () {
   }
   handleLogin () {
-    axios.post('http://10.9.28.43:3000/signup', {
+    axios.post('http://120.78.185.217:5005/signup', {
       username: this.state.username,
       password: this.state.password
     }).then(res => {
