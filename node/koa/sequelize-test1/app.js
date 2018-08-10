@@ -15,10 +15,6 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 });
 
 const User = sequelize.define('users', {
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true
-  },
   username: {
     type: Sequelize.STRING
   },
@@ -30,17 +26,17 @@ const User = sequelize.define('users', {
 });
 
 
-// User.create({
-//   id: '1',
-//   username: 'asdddd',
-//   password: 'asdddd'
-// }).then(res => {
-//   console.log('success', JSON.stringify(res))
-// }).catch(err => {
-//   let _err = JSON.stringify(err)
-//   console.log('fail', err.name)
-//   console.log(err.errors[0].message)
-// })
+User.create({
+  username: '12345',
+  password: '12345'
+}).then(res => {
+  console.log('success', JSON.stringify(res))
+}).catch(err => {
+  let _err = JSON.stringify(err)
+  console.log('fail', _err)
+  // console.log('fail', err.name)
+  // console.log(err.errors[0].message)
+})
 
 // (async () => {
 //   var result = await User.create({

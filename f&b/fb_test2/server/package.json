@@ -1,0 +1,20 @@
+{
+  "name": "fb_test2_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "xx",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.5.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa2-cors": "^2.0.6",
+    "mysql": "^2.16.0",
+    "mysql2": "^1.6.1",
+    "sequelize": "^4.38.0"
+  }
+}
