@@ -1,6 +1,6 @@
 var config = {
   dialect: 'mysql',
-  database: 'user',
+  database: 'fb_test2',
   username: 'root',
   password: '123456',
   host: 'localhost',
