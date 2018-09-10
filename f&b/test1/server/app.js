@@ -10,8 +10,8 @@ router.post('/test', async (ctx) => {
     msg: '成了'
   }
 })
-router.get('/ggg', async (ctx) => {
-  ctx.body = 'ggg'
+router.get('/Asd', async (ctx) => {
+  ctx.body = 'Asd'
 })
 
 
