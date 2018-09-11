@@ -23,11 +23,11 @@ export default {
             })
             EventEmitter.on('EventGameWin', (scores) => {
                 this.scores = scores
-                this.onReqOverGame()
+                // this.onReqOverGame()
             })
             EventEmitter.on('EventGameOver', (scores) => {
                 this.scores = scores
-                this.onReqOverGame()
+                // this.onReqOverGame()
             })
         }
   },
