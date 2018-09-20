@@ -31,10 +31,16 @@ module.exports = {
             // fallback
             '/': [
                 {
-                    title: 'tile',
+                    title: 'title1',
                     collapsable: false,
                     children: [
-                        'about',
+                        'about'
+                    ]
+                },
+                {
+                    title: 'title2',
+                    collapsable: false,
+                    children: [
                         'contact'
                     ]
                 }
