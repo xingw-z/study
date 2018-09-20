@@ -22,10 +22,23 @@ module.exports = {
         //     }
         // ]
         sidebar: {
+            '/foo/': [
+              '',     /* /foo/ */
+              'foo1',  /* /foo/one.html */
+            ],
+    
+      
+            // fallback
             '/': [
-                '',
-                'test'
+                {
+                    title: 'tile',
+                    collapsable: false,
+                    children: [
+                        'about',
+                        'contact'
+                    ]
+                }
             ]
-        }
+          }
     }
 }
