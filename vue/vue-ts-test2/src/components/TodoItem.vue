@@ -15,7 +15,7 @@ export default class TodoItem extends Vue {
   @Prop() private msg!: string;
 
   private mounted() {
-    console.log(123);
+    console.log(this.msg);
   }
 }
 </script>
