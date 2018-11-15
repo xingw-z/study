@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>copy1</title>
+</head>
+<body>
+    <!-- <input id="demoInput" value="hello world"> -->
+<button id="btn">点我复制</button>
+</body>
+<script>
+    // const btn = document.querySelector('#btn');
+    // btn.addEventListener('click', () => {
+    //     const input = document.querySelector('#demoInput');
+    //     input.select();
+    //     if (document.execCommand('copy')) {
+    //         document.execCommand('copy');
+    //         console.log('复制成功');
+    //     }
+    // })
+    const btn = document.querySelector('#btn');
+    btn.addEventListener('click',() => {
+        const input = document.createElement('input');
+        var u = navigator.userAgent;
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        input.setAttribute('readonly', 'readonly');
+        input.setAttribute('value', 'das');
+        document.body.appendChild(input);
+        if (isiOS) {
+            input.setSelectionRange(0, 9999);
+           
+        } else {
+            input.select()
+        }
+        
+        if (document.execCommand('copy')) {
+            document.execCommand('copy');
+            console.log('复制成功', isiOS, 'isios');
+        }
+        document.body.removeChild(input);
+    })
+
+
+
+
+</script>
+</html>
