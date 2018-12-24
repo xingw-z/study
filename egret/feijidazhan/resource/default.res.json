@@ -1,0 +1,235 @@
+{
+	"groups": [
+		{
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,bg_jpg,egret_icon_png,description_json,b1_png,b2_png,bg2_jpg,bgGrey_png,bloodBar_png,bloodBarBg_png,boss_png,btn_start_png,buff_blood_png,enemyBullet_png,f1_png,f2_png,game-over_png,hp_png,restart_png,resultBg_png,test_fnt,test_png,title_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/CheckBox/checkbox_select_disabled.png",
+			"type": "image",
+			"name": "checkbox_select_disabled_png"
+		},
+		{
+			"url": "assets/CheckBox/checkbox_select_down.png",
+			"type": "image",
+			"name": "checkbox_select_down_png"
+		},
+		{
+			"url": "assets/CheckBox/checkbox_select_up.png",
+			"type": "image",
+			"name": "checkbox_select_up_png"
+		},
+		{
+			"url": "assets/CheckBox/checkbox_unselect.png",
+			"type": "image",
+			"name": "checkbox_unselect_png"
+		},
+		{
+			"url": "assets/ItemRenderer/selected.png",
+			"type": "image",
+			"name": "selected_png"
+		},
+		{
+			"url": "assets/Panel/border.png",
+			"type": "image",
+			"name": "border_png"
+		},
+		{
+			"url": "assets/Panel/header.png",
+			"type": "image",
+			"name": "header_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_select_disabled.png",
+			"type": "image",
+			"name": "radiobutton_select_disabled_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_select_down.png",
+			"type": "image",
+			"name": "radiobutton_select_down_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_select_up.png",
+			"type": "image",
+			"name": "radiobutton_select_up_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_unselect.png",
+			"type": "image",
+			"name": "radiobutton_unselect_png"
+		},
+		{
+			"url": "assets/ScrollBar/roundthumb.png",
+			"type": "image",
+			"name": "roundthumb_png"
+		},
+		{
+			"url": "assets/Slider/thumb.png",
+			"type": "image",
+			"name": "thumb_png"
+		},
+		{
+			"url": "assets/Slider/track.png",
+			"type": "image",
+			"name": "track_png"
+		},
+		{
+			"url": "assets/Slider/tracklight.png",
+			"type": "image",
+			"name": "tracklight_png"
+		},
+		{
+			"url": "assets/ToggleSwitch/handle.png",
+			"type": "image",
+			"name": "handle_png"
+		},
+		{
+			"url": "assets/ToggleSwitch/off.png",
+			"type": "image",
+			"name": "off_png"
+		},
+		{
+			"url": "assets/ToggleSwitch/on.png",
+			"type": "image",
+			"name": "on_png"
+		},
+		{
+			"url": "assets/Button/button_down.png",
+			"type": "image",
+			"name": "button_down_png"
+		},
+		{
+			"url": "assets/Button/button_up.png",
+			"type": "image",
+			"name": "button_up_png"
+		},
+		{
+			"url": "assets/ProgressBar/thumb_pb.png",
+			"type": "image",
+			"name": "thumb_pb_png"
+		},
+		{
+			"url": "assets/ProgressBar/track_pb.png",
+			"type": "image",
+			"name": "track_pb_png"
+		},
+		{
+			"url": "assets/ScrollBar/track_sb.png",
+			"type": "image",
+			"name": "track_sb_png"
+		},
+		{
+			"url": "assets/bg.jpg",
+			"type": "image",
+			"name": "bg_jpg"
+		},
+		{
+			"url": "assets/egret_icon.png",
+			"type": "image",
+			"name": "egret_icon_png"
+		},
+		{
+			"name": "description_json",
+			"type": "json",
+			"url": "config/description.json"
+		},
+		{
+			"name": "b1_png",
+			"type": "image",
+			"url": "assets/oldFeiji/b1.png"
+		},
+		{
+			"name": "b2_png",
+			"type": "image",
+			"url": "assets/oldFeiji/b2.png"
+		},
+		{
+			"name": "bg2_jpg",
+			"type": "image",
+			"url": "assets/oldFeiji/bg.jpg"
+		},
+		{
+			"name": "bgGrey_png",
+			"type": "image",
+			"url": "assets/oldFeiji/bgGrey.png"
+		},
+		{
+			"name": "bloodBar_png",
+			"type": "image",
+			"url": "assets/oldFeiji/bloodBar.png"
+		},
+		{
+			"name": "bloodBarBg_png",
+			"type": "image",
+			"url": "assets/oldFeiji/bloodBarBg.png"
+		},
+		{
+			"name": "boss_png",
+			"type": "image",
+			"url": "assets/oldFeiji/boss.png"
+		},
+		{
+			"name": "btn_start_png",
+			"type": "image",
+			"url": "assets/oldFeiji/btn_start.png"
+		},
+		{
+			"name": "buff_blood_png",
+			"type": "image",
+			"url": "assets/oldFeiji/buff_blood.png"
+		},
+		{
+			"name": "enemyBullet_png",
+			"type": "image",
+			"url": "assets/oldFeiji/enemyBullet.png"
+		},
+		{
+			"name": "f1_png",
+			"type": "image",
+			"url": "assets/oldFeiji/f1.png"
+		},
+		{
+			"name": "f2_png",
+			"type": "image",
+			"url": "assets/oldFeiji/f2.png"
+		},
+		{
+			"name": "game-over_png",
+			"type": "image",
+			"url": "assets/oldFeiji/game-over.png"
+		},
+		{
+			"name": "hp_png",
+			"type": "image",
+			"url": "assets/oldFeiji/hp.png"
+		},
+		{
+			"name": "restart_png",
+			"type": "image",
+			"url": "assets/oldFeiji/restart.png"
+		},
+		{
+			"name": "resultBg_png",
+			"type": "image",
+			"url": "assets/oldFeiji/resultBg.png"
+		},
+		{
+			"name": "test_fnt",
+			"type": "font",
+			"url": "assets/oldFeiji/test.fnt"
+		},
+		{
+			"name": "test_png",
+			"type": "image",
+			"url": "assets/oldFeiji/test.png"
+		},
+		{
+			"name": "title_png",
+			"type": "image",
+			"url": "assets/oldFeiji/title.png"
+		}
+	]
+}
