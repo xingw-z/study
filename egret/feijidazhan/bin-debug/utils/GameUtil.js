@@ -25,6 +25,7 @@ var feiji;
             rect1.y = obj1.y;
             rect2.x = obj2.x;
             rect2.y = obj2.y;
+            console.log(obj1, obj2);
             return rect1.intersects(rect2);
         };
         return GameUitl;
