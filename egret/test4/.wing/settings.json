@@ -1,0 +1,9 @@
+{
+	"search.exclude": {
+		"**/bin-debug": true,
+		"**/bin-release": true
+	}
+,
+"window.zoomLevel": 1,
+"editor.fontSize": 12
+}

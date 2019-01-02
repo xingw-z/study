@@ -56,7 +56,7 @@ var feiji;
             /** 我的飞机 */
             this.myFeiji = new feiji.Airplane(RES.getRes('f1_png'), 100, 'f1_png');
             this.myFeiji.y = this.stageH - this.myFeiji.height - 50;
-            this.addChild(this.myFeiji);
+            // this.addChild(this.myFeiji);
             this.scorePanel = new feiji.ScorePanel();
             // 预创建
             this.preCreatedInstance();
@@ -92,6 +92,7 @@ var feiji;
         GameContainer.prototype.gameStart = function () {
             // this.bg.touchEnabled = true;
             // this.bg.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStop, this);
+            this.addChild(this.myFeiji);
             this.myScore = 0;
             this.removeChild(this.btnStart);
             this.bg.start();
