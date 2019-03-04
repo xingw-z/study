@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>13</title>
+</head>
+<body>
+    test
+</body>
+<script>
+var romanToInt = function(s) {
+    let _a = s.split('');
+    let _num = 0;
+    while (_a.length > 0) {
+        const _ele = _a[0];
+        if (_ele === 'I') {
+            if (_a[1] === 'V') {
+                _num += 4;
+                _a.shift();
+            } else if (_a[1] === 'X') {
+                _num += 9;
+                _a.shift();
+            } else {
+                ojbk(_ele);
+            }
+        } else if (_ele === 'X') {
+            if (_a[1] === 'L') {
+                _num += 40;
+                _a.shift();
+            } else if (_a[1] === 'C') {
+                _num += 90;
+                _a.shift();
+            } else {
+                ojbk(_ele);
+            }
+        } else if (_ele === 'C') {
+            if (_a[1] === 'D') {
+                _num += 400;
+                _a.shift();
+            } else if (_a[1] === 'M') {
+                _num += 900;
+                _a.shift();
+            } else {
+                ojbk(_ele);
+            }
+        } else {
+            ojbk(_ele);
+        }
+
+        _a.shift();
+        function ojbk(n) {
+            switch (n) {
+                case 'I':
+                    _num += 1;
+                    break;
+                case 'V':
+                    _num += 5;
+                    break;
+                case 'X':
+                    _num += 10;
+                    break;
+                case 'L':
+                    _num += 50;
+                    break;
+                case 'C':
+                    _num += 100;
+                    break;
+                case 'D':
+                    _num += 500;
+                    break;
+                case 'M':
+                    _num += 1000;
+                    break;
+            }
+        }
+        function yi() {
+            _a.shift();
+        }
+    }
+    console.log(_num);
+    return _num;
+};
+
+romanToInt('MCMXCIV');
+</script>
+</html>
