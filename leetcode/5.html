@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<!-- <script src="./5.最长回文子串.js"></script> -->
+<script>
+
+// var longestPalindrome = function(s) {
+//     if (s.length <= 1) {
+//         return s;
+//     }
+//     if (s === hw(s)) {
+//         return s;
+//     }
+//     let _str = s, _res = s[0];
+//     let _val = _str.length % 2;
+//     for (let i = 0, j = _str.length; i < j; i++) {
+        
+//         let _start = i, _end = i;
+        
+//         while(_start >= 0 && _end <= j && _str[_start] === _str[_end]) {
+//             if (_end - _start + 1 > _res.length) {
+//                 _res = _str.substring(_start, _end + 1);
+//             }
+//             _start--;
+//             _end++;
+//         }
+
+//         let _s2 = i, _e2 = i + 1;
+//         while(_s2 >= 0 && _e2 <= j && _str[_s2] === _str[_e2]) {
+//             if (_e2 - _s2 + 1 > _res.length) {
+//                 _res = _str.substring(_s2, _e2 + 1);
+//             }
+//             _s2--;
+//             _e2++;
+//         }
+//     }
+//     function hw(x) {
+//         return x.split('').reverse().join('');
+//     }
+//     console.log(_res)
+//     return _res
+// };
+
+// longestPalindrome('cbbd')
+
+
+
+
+    function longestPalindrome(s) {
+        var n = s.length;
+        var tmp; 
+        var distold = 0,distnew = 0,flag = 0; 
+        if (n == 0) return tmp; 
+        else if (n == 1) return s; 
+        else { 
+            for (let i = 0; i < n; i++) { 
+                for (let j = n - 1; j > i; j--) { 
+                    flag = 1; distnew = 0; 
+                    console.log(s[i], s[j], i, j, '第二层')
+                    if (s[i] == s[j]) {
+                        
+                        for (let k = 1; k <= (j - i) / 2; k++) { 
+                            if (s[i + k] != s[j - k]) { 
+                                flag = 0; break; 
+                            } 
+                        } 
+                        if(flag == 1) distnew = j - i; 
+                        console.log(distnew, i, j, '第三层')
+                        if (distold < distnew ) { 
+                            tmp = s.substr(i, j - i + 1); 
+                            distold = distnew; 
+                        }
+                    } 
+                } 
+            } 
+        } 
+        if (distold == 0) tmp = s[0]; 
+        console.log(tmp, '动态规划')
+        return tmp; 
+    } 
+
+    longestPalindrome('cbbd')
+
+</script>
+</html>
