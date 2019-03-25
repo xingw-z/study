@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+// var findMedianSortedArrays = function(nums1, nums2) {
+//     var arr = [...nums1, ...nums2].sort((x, y) => x - y);
+//     // arr = Array.from(new Set(arr));
+//     var _len = arr.length;
+//     console.log(arr)
+//     let _b = _len / 2;
+//     if (_len % 2 === 0) {
+//         return (arr[_b - 1] + arr[_b]) / 2
+//     } else {
+//         return arr[Math.floor(_b)];
+//     }
+// };
+// console.log(findMedianSortedArrays([1,1], [1,2]));
+var qsort = _arr => _arr.length > 1 ? [...qsort(_arr.filter(x => {
+    return x < _arr[0]
+})),
+_arr.filter(x => {
+    return x === _arr[0]
+}), 
+...qsort(_arr.filter(x => {
+    return x > _arr[0]
+}))] : _arr;
+console.log(qsort([1,1]))
+</script>
+</html>
