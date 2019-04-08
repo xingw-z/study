@@ -40,24 +40,29 @@
  * @return {number}
  */
 var findMedianSortedArrays = function(nums1, nums2) {
-    var qsort = _arr => _arr.length > 1 ? [...qsort(_arr.filter(x => {
-        return x < _arr[0]
-    })),
-    ..._arr.filter(x => {
-        return x === _arr[0]
-    }), 
-    ...qsort(_arr.filter(x => {
-        return x > _arr[0]
-    }))] : _arr;
-    // var arr = [...nums1, ...nums2].sort((x, y) => x - y);
-    var arr = qsort([...nums1, ...nums2]);
-    var _len = arr.length;
-    let _b = _len / 2;
-    if (_len % 2 === 0) {
-        return (arr[_b - 1] + arr[_b]) / 2
-    } else {
-        return arr[Math.floor(_b)];
+
+    let arr1 = nums1, arr2 = nums2;
+    let n = arr1.length, m = arr2.length;
+
+    if (n > m) {
+        return findMedianSortedArrays(arr2, arr1)
     }
-    
+
+    let L1, L2, R1, R2, c1, c2, lo = 0, hi = 2 * n;
+    while (lo <= hi) {
+        c1 = ~~((lo + hi) / 2);
+        c2 = m + n - c1;
+        L1 = (c1 == 0) ? Number.MIN_SAFE_INTEGER : arr1[ ~~((c1-1)/2) ];
+        R1 = (c1 == 2 * n) ? Number.MAX_SAFE_INTEGER : arr1[ ~~(c1/2)];
+        L2 = (c2 == 0) ? Number.MIN_SAFE_INTEGER : arr2[ ~~((c2-1)/2)];
+        R2 = (c2 == 2 * m) ? Number.MAX_SAFE_INTEGER : arr2[ ~~(c2/2) ];
+        
+        if (L1 > R2) {
+            hi = c1 - 1;
+        } else if (L2 > R1) {
+            lo = c1 + 1;
+        } else break;
+    }
+    return (Math.max(L1, L2) + Math.min(R1, R2)) / 2.0;
 };
 
