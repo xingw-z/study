@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>6</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function len(s, n) {
+        let m = 2 * n - 2;
+        let _len = s.length;
+        let _v = ~~(_len / m);
+        let _chashu = _len % m;
+        let _czc = _chashu - n;
+        console.log(`_v = ${_v} m = ${m} _chashu = ${_chashu}`);
+        let _cd = 0;
+        if (n === 1) {
+            return s;
+        } else {
+            let _add = 0;
+            if (_chashu > 0) {
+                _add = 1;
+            }
+            if (_czc >0) {
+                _add += _czc
+            }
+            _cd = _v * (n - 1) + _add;
+        }
+        console.log(`cd = ${_cd}`);
+        let _list = [];
+        for (let i = 0; i < n; i++) {
+            let _nList = []
+            for (let j = 0; j < _cd; j++) {
+                _nList.push(``);
+            }
+            _list.push(_nList);
+        }
+        console.log(_list)
+        let _i = 0, _j = 0, _k = 0;
+        let fx = true;
+        while(_k < _len) {
+            _list[_i][_j] = s[_k];
+            
+            if (fx) {
+                _i++;
+            } else {
+                _i--;
+                _j++;
+            }
+            _k++;
+            if (_i >= _list.length - 1) {
+                fx = false
+            }
+            if (_i <= 0) {
+                fx = true
+            }
+        }
+        let _str = '';
+        for (let i = 0; i < _list.length; i++) {
+            _str += _list[i].join('');
+        }
+        return _str;
+    }
+    len('LEETCODEISHIRING', 2);
+</script>
+</html>

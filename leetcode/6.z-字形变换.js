@@ -50,6 +50,56 @@
  * @return {string}
  */
 var convert = function(s, numRows) {
-    
+    let n = numRows;
+    let m = 2 * n - 2;
+    let _len = s.length;
+    let _v = ~~(_len / m);
+    let _chashu = _len % m;
+    let _czc = _chashu - n;
+    let _cd = 0;
+    if (n === 1) {
+        return s;
+    } else {
+        let _add = 0;
+        if (_chashu > 0) {
+            _add = 1;
+        }
+        if (_czc >0) {
+            _add += _czc
+        }
+        _cd = _v * (n - 1) + _add;
+    }
+    let _list = [];
+    for (let i = 0; i < n; i++) {
+        let _nList = []
+        for (let j = 0; j < _cd; j++) {
+            _nList.push(``);
+        }
+        _list.push(_nList);
+    }
+    let _i = 0, _j = 0, _k = 0;
+    let fx = true;
+    while(_k < _len) {
+        _list[_i][_j] = s[_k];
+        
+        if (fx) {
+            _i++;
+        } else {
+            _i--;
+            _j++;
+        }
+        _k++;
+        if (_i >= _list.length - 1) {
+            fx = false
+        }
+        if (_i <= 0) {
+            fx = true
+        }
+    }
+    let _str = '';
+    for (let i = 0; i < _list.length; i++) {
+        _str += _list[i].join('');
+    }
+    return _str;
 };
 
