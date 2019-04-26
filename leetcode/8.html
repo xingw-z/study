@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>8</title>
+</head>
+<body>
+    
+</body>
+<script>
+var myAtoi = function(str) {
+    let _reg = new RegExp(/[^\d.-]/, 'g');
+    let _return = str.trim();
+    if (/[\d-]/.test(_return[0])) {
+        let _isNeg = false;
+        if (_return[0] === '-') {
+            _isNeg = true;
+        }
+        let _n = _return.replace(_reg, '');
+        
+        let _val = ~~_n;
+
+        let _isTrue = false;
+        if ((_val + '') === _n) {
+            _isTrue = true;
+        }
+        if (_isTrue) {
+            _return = _val
+        } else {
+            _return = _isNeg ? -2147483648 : 2147483647
+        }
+    } else {
+        return 0;
+    }
+    return ~~_return;
+};
+
+console.log(myAtoi('-91283472332'));
+
+// var myAtoi = function(str) {
+//     let _notNum = new RegExp(/\D/, 'g');
+//     let _return = str.trim();
+//     if (/[\d-]/.test(_return[0])) {
+//         let _isNeg = false;
+//         if (_return[0] === '-') {
+//             _isNeg = true;
+//         }
+//         let _n = _return.replace(_notNum, '');
+//         if (_n.length > 10) {
+//             _return =  _isNeg ? -2147483648 : 2147483647
+//         } else if (_n.length === 10) {
+//             let _NegD = '2147483648', _zD = '2147483647';
+//             let _val = '';
+//             if (_isNeg) {
+//                 _val = test(_NegD, _n);
+//             } else {
+//                 _val = test(_zD, _n);
+//             }
+//             _return = _val ? _isNeg ? ~~_NegD * -1 : ~~_zD : ~~_n * (_isNeg ? -1 : 1);
+//             function test(a, b) {
+//                 let _r = false;
+//                 for (let i = 0; i < 10; i++) {
+//                     if (~~a[i] < ~~b[i]) {
+//                         _r = true;
+//                         break;
+//                     }
+//                 }
+//                 return _r;
+//             }
+            
+//         } else {
+//             _return =  ~~_n * (_isNeg ? -1 : 1);
+//         }
+//     } else {
+//         return 0;
+//     }
+//     return ~~_return;
+// };
+</script>
+
+</html>
