@@ -71,6 +71,29 @@
  * @return {number}
  */
 var myAtoi = function(str) {
-    
+    let _reg = new RegExp(/[^\d.-]/, 'g');
+    let _return = str.trim();
+    if (/[\d-]/.test(_return[0])) {
+        let _isNeg = false;
+        if (_return[0] === '-') {
+            _isNeg = true;
+        }
+        let _n = _return.replace(_reg, '');
+        
+        let _val = ~~_n;
+
+        let _isTrue = false;
+        if ((_val + '') === _n) {
+            _isTrue = true;
+        }
+        if (_isTrue) {
+            _return = _val
+        } else {
+            _return = _isNeg ? -2147483648 : 2147483647
+        }
+    } else {
+        return 0;
+    }
+    return ~~_return;
 };
 
