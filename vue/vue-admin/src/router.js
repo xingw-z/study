@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 
 Vue.use(Router)
-
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -11,7 +10,14 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      redirect: '/homePage1',
+      children: [
+        {path: '/homePage1', component: () => import('./views/HomePage1.vue'), meta: {title: '11111'}},
+        {path: '/homePage2', component: () => import('./views/HomePage2.vue'), meta: {title: '22222'}},
+        {path: '/homePage3', component: () => import('./views/HomePage3.vue'), meta: {title: '33333'}},
+
+			],
     },
     {
       path: '/about',
