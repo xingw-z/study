@@ -3,8 +3,8 @@ const config = {
   dialect: 'mysql',
   database: 'fb_test2',
   username: 'root',
-  password: 'am12301230..',
-  host: '47.52.95.132',
+  password: '',
+  host: '',
   port: 3306
 }
 
