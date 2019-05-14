@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./jq.js"></script>
+</head>
+<body>
+    <div class="w1">
+        <div class="n1">w1n1</div>
+        <div class="n2">w1n2</div>
+    </div>
+    <div class="w2">
+            <div class="n1">w2n1</div>
+            <div class="n2">w2n2</div>
+    </div>
+    <script>
+        jQuery = function( selector, context ) {
+
+            // The jQuery object is actually just the init constructor 'enhanced'
+            // Need init if jQuery is called (just allow error to be thrown if not included)
+            return new jQuery.fn.init( selector, context, jQuery('.w2') );
+            }
+        console.log($('.n1'))
+    </script>
+</body>
+</html>
