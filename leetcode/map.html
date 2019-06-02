@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    
+        <style>
+            #allmap{
+                width: 800px;
+                height: 800px;
+            }
+        </style>
+</head>
+<body>
+    <div id="allmap"></div>
+</body>
+    <script>
+        function initialize() {
+          
+          var map = new BMap.Map("allmap");
+          var point = new BMap.Point(116.404, 39.915);
+            map.centerAndZoom(point, 15); 
+            function addMarker(point){
+                var marker = new BMap.Marker(point);
+                map.addOverlay(marker);
+            }
+            
+            var bounds = map.getBounds();
+            var sw = bounds.getSouthWest();
+            var ne = bounds.getNorthEast();
+            var lngSpan = Math.abs(sw.lng - ne.lng);
+            var latSpan = Math.abs(ne.lat - sw.lat);
+
+            for (var i = 0; i < 25; i ++) {
+                var point = new BMap.Point(sw.lng + lngSpan * (Math.random() * 0.7), ne.lat - latSpan * (Math.random() * 0.7));
+                // addMarker(point);
+            
+            }
+            ggToBd(map)
+        }  
+           
+        function loadScript() {  
+          var script = document.createElement("script");  
+          script.src = "http://api.map.baidu.com/api?v=2.0&ak=NG2ok508b3jQc6DOpDx2kyvOOg0gAheo&callback=initialize";
+          document.body.appendChild(script);  
+        } 
+        function ggToBd(bm) {
+            var x = 1.37166196588576123, y = 103.66869980395200834;
+            var ggPoint = new BMap.Point(x,y);
+            //添加谷歌marker和label
+            var markergg = new BMap.Marker(ggPoint);
+            bm.addOverlay(markergg); //添加谷歌marker
+            var labelgg = new BMap.Label("未转换的谷歌标注（错误）",{offset:new BMap.Size(20,-10)});
+            console.log(ggPoint, '???')
+            markergg.setLabel(labelgg); //添加谷歌label
+
+            //坐标转换完之后的回调函数
+            translateCallback = function (data){
+            if(data.status === 0) {
+                var marker = new BMap.Marker(data.points[0]);
+                bm.addOverlay(marker);
+                var label = new BMap.Label("转换后的百度标注（正确）",{offset:new BMap.Size(20,-10)});
+                console.log(marker, '滴滴滴')
+                marker.setLabel(label); //添加百度label
+                bm.setCenter(data.points[0]);
+            }
+            }
+//             1.37166196588576123	103.66869980395200834	
+// 1.37166196588576123	103.66869980395200834
+            setTimeout(function(){
+                var convertor = new BMap.Convertor();
+                var pointArr = [];
+                pointArr.push(ggPoint);
+                convertor.translate(pointArr, 3, 5, translateCallback)
+            }, 1000);
+        }
+           
+        window.onload = loadScript;  
+    </script>
+</html>
