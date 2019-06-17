@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>15</title>
+</head>
+<body>
+<script>
+    // var threeSum = function(nums) {
+    //     let _list = [];
+    //     for (let i = 0, j = nums.length; i < j ; i++) {
+    //         let _x = nums[i];
+    //         for (let i2 = i + 1; i2 < j; i2++) {
+    //             let _y = nums[i2];
+    //             for (let i3 = i2 + 1; i3 < j; i3++) {
+    //                 if ((_x + _y + nums[i3]) === 0) {
+    //                     _list.push(JSON.stringify([_x, _y, nums[i3]].sort((a, b) => a - b)));
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     _list = [...new Set(_list)];
+    //     for (let i = 0, j = _list.length; i < j; i++) {
+    //         _list[i] = JSON.parse(_list[i]);
+    //     }
+    //     return _list;
+    // };
+    
+    var threeSum = function (nums) {
+        var _sort = arr => arr.length > 1 ? [..._sort(arr.filter(x => x < arr[0])), ...arr.filter(x => x === arr[0]), ..._sort(arr.filter(x => x > arr[0]))] : arr;
+        nums = _sort(nums);
+        
+    }
+
+    console.log(threeSum([-1, 0, 1, 2, -1, -4]))
+</script>
+</body>
+</html>
