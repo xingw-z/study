@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>index1</title>
+    <style>
+        html, body{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            /* overflow-x: hidden; */
+            /* overflow: hidden; */
+        }
+        .demoCanvas{
+            width: 100vw;
+        }
+        canvas{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+        .ddd{
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="ddd">asd</div>
+    <!-- <div class="demoCanvas" id="demoCanvas"></div> -->
+    <div class="demoCanvas" id="demoCanvas"></div>
+    <!-- <div src="test.svga" loops="0" clearsAfterStop="true" style="width: 100%;height: 100%;overflow: hidden;position: relative;"></div> -->
+</body>
+<script src="https://cdn.jsdelivr.net/npm/svgaplayerweb@2.3.0/build/svga.min.js"></script>
+<script>
+    document.querySelector('.ddd').addEventListener('click', function() {
+        location.href = 'index2.html'
+    });
+    var _canvas = document.querySelector('canvas');
+    var _height = document.body.clientHeight, _width = document.body.clientWidth;
+    console.log((_width / _height) < 750/1334 && _height < 667, _height > 667, _width / _height < 750/1334)
+
+    // if ((_width / _height) < 750/1334 && _height > 667) {
+    //     console.log(111)
+    //     let _s = (_height - 667) / 2;
+    //     _canvas.style.top =  -_s + 'px';
+    // }
+    // if (_height > 667) {
+    //     let _s = (_height - 667) / 2;
+    //     _canvas.style.top =  -_s + 'px';
+    // }
+    var parser = new SVGA.Parser('#demoCanvas')
+    var player = new SVGA.Player('#demoCanvas')
+
+    // 解析 SVGA 文件
+    parser.load('./test.svga', function (videoItem) {
+        // 设置 & 播放动画
+        console.log(videoItem)
+        let _val = videoItem.videoSize.width / _width;
+        let _h = videoItem.videoSize.height / _val;
+        // if (_h < _height) {
+        //     document.querySelector('#demoCanvas').style.height = _h + 'px';
+        // } else {
+        //     document.querySelector('#demoCanvas').style.height = '100vh';
+        // }
+        document.querySelector('#demoCanvas').style.height = _h + 'px';
+        
+        player.setVideoItem(videoItem);
+        player.startAnimation();
+    }, function(error) {
+    })
+    document.body.addEventListener('click', function() {
+        location.href = 'index2.html'
+    });
+</script>
+</html>
