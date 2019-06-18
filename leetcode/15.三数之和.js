@@ -7,23 +7,36 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var threeSum = function(nums) {
-    let _list = [];
-    for (let i = 0, j = nums.length; i < j ; i++) {
-        let _x = nums[i];
-        for (let i2 = i + 1; i2 < j; i2++) {
-            let _y = nums[i2];
-            for (let i3 = i2 + 1; i3 < j; i3++) {
-                if ((_x + _y + nums[i3]) === 0) {
-                    _list.push(JSON.stringify([_x, _y, nums[i3]].sort((a, b) => a - b)));
-                }
+var threeSum = function (nums) {
+    if (!nums || nums.length <= 0) {
+        return nums;
+    }
+    nums = nums.sort((x, y) => x - y);
+    let res = []
+    let hash = {}
+    for (let i1 = 0, j1 = nums.length - 1; i1 < j1; i1++) {
+        for (let i2 = i1 + 1, j2 = nums.length; i2 < j2; i2++) {
+            const _ele = -(nums[i1] + nums[i2]);
+            if (hash[nums[i2]] !== undefined) {
+                res.push([...hash[nums[i2]], nums[i2]])
+                hash[_ele] = undefined;
+            } else {
+                hash[_ele] = [nums[i1], nums[i2]];
             }
         }
     }
-    _list = [...new Set(_list)];
-    for (let i = 0, j = _list.length; i < j; i++) {
-        _list[i] = JSON.parse(_list[i]);
+    if (res.length <= 0) {
+        return []
     }
-    return _list;
-};
+    let _str = res.join('(').split('(');
+    let _arr = [...new Set(_str)];
+    for (let i = 0, j = _arr.length; i < j; i++) {
+        if (!_arr[i]) {
+            continue;
+        }
+        _arr[i] = JSON.parse('[' + _arr[i] + ']')
+    }
+
+    return _arr;
+}
 
