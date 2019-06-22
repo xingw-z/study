@@ -14,17 +14,20 @@ var threeSum = function (nums) {
     nums = nums.sort((x, y) => x - y);
     let res = []
     let hash = {}
+    let hash2 = {}
     for (let i1 = 0, j1 = nums.length - 1; i1 < j1; i1++) {
         for (let i2 = i1 + 1, j2 = nums.length; i2 < j2; i2++) {
             const _ele = -(nums[i1] + nums[i2]);
-            if (hash[nums[i2]] !== undefined) {
+            if (hash[nums[i2]] !== undefined && i2 !== hash2[nums[i2]]) {
                 res.push([...hash[nums[i2]], nums[i2]])
                 hash[_ele] = undefined;
             } else {
-                hash[_ele] = [nums[i1], nums[i2]];
+                hash[_ele] = [nums[i1], nums[i2]]; 
+                hash2[_ele] = i2;
             }
         }
     }
+    // 目前是 假如 之前 1 + -2  存了1  到了后面 时  查到这个1 又符合了 也就是1 用了两次
     if (res.length <= 0) {
         return []
     }
