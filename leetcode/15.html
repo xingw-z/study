@@ -69,7 +69,22 @@
         if (!nums || nums.length <= 0) {
             return nums;
         }
-        var _qsort = arr => arr.length > 1 ? [..._qsort(arr.filter(a => a < arr[0])), arr.filter(a => a === arr[0]), ..._qsort(arr.filter(a => a > arr[0]))] : arr
+        var _qsort = arr => arr.length > 1 ? [..._qsort(arr.filter(a => a < arr[0])), ...arr.filter(a => a === arr[0]), ..._qsort(arr.filter(a => a > arr[0]))] : arr;
+        nums = _qsort(nums);
+        for (let i = 1, j = nums.length; i < j - 1; i++) {
+            let first = 0;
+            let last = j - 1;
+            do {
+                let result = nums[i] + nums[first] + nums[last];
+                if (result === 0) {
+                    res.push([nums[i]], nums[first], nums[last]);
+                }
+                if (result <= 0 && first < i) {
+                    
+                }
+            }
+        }
+        return _qsort(nums);
     }
     
     // var threeSum = function (nums) {
