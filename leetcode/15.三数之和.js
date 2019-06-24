@@ -11,35 +11,30 @@ var threeSum = function (nums) {
     if (!nums || nums.length <= 0) {
         return nums;
     }
-    nums = nums.sort((x, y) => x - y);
     let res = []
-    let hash = {}
-    let hash2 = {}
-    for (let i1 = 0, j1 = nums.length - 1; i1 < j1; i1++) {
-        for (let i2 = i1 + 1, j2 = nums.length; i2 < j2; i2++) {
-            const _ele = -(nums[i1] + nums[i2]);
-            if (hash[nums[i2]] !== undefined && i2 !== hash2[nums[i2]]) {
-                res.push([...hash[nums[i2]], nums[i2]])
-                hash[_ele] = undefined;
-            } else {
-                hash[_ele] = [nums[i1], nums[i2]]; 
-                hash2[_ele] = i2;
-            }
+    let _len = nums.length;
+    var _qsort = arr => arr.length > 1 ? [..._qsort(arr.filter(a => a < arr[0])), ...arr.filter(a => a === arr[0]), ..._qsort(arr.filter(a => a > arr[0]))] : arr;
+    nums = _qsort(nums);
+    if (nums[0] <= 0 && nums[_len - 1] >=0) {
+        for (let i = 0; i < _len - 2;) {
+            if (nums[i] > 0) break
+            let first = i + 1;
+            let last = _len - 1;
+            do {
+                if (first >= last || nums[i] * nums[last] > 0) break;
+                let result = nums[i] + nums[first] + nums[last];
+                if (result === 0) {
+                    res.push([nums[i], nums[first], nums[last]]);
+                }
+                if (result <= 0) {
+                    while (first < last && nums[first] === nums[++first]){}
+                } else {
+                    while (first < last && nums[last] === nums[--last]){}
+                }
+            }while(first < last)
+            while(nums[i] === nums[++i]){}
         }
     }
-    // 目前是 假如 之前 1 + -2  存了1  到了后面 时  查到这个1 又符合了 也就是1 用了两次
-    if (res.length <= 0) {
-        return []
-    }
-    let _str = res.join('(').split('(');
-    let _arr = [...new Set(_str)];
-    for (let i = 0, j = _arr.length; i < j; i++) {
-        if (!_arr[i]) {
-            continue;
-        }
-        _arr[i] = JSON.parse('[' + _arr[i] + ']')
-    }
-
-    return _arr;
+    return res;
 }
 
