@@ -1,12 +1,14 @@
-/*
- * @lc app=leetcode.cn id=15 lang=javascript
- *
- * [15] 三数之和
- */
-/**
- * @param {number[]} nums
- * @return {number[][]}
- */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>15-2</title>
+</head>
+<body>
+</body>
+<script>
 var threeSum = function (nums) {
     var _qsort = arr => arr.length > 1 ? [..._qsort(arr.filter(a => a < arr[0])), ...arr.filter(a => a === arr[0]), ..._qsort(arr.filter(a => a > arr[0]))] : arr;
     nums = _qsort(nums);
@@ -15,6 +17,7 @@ var threeSum = function (nums) {
     if (nums[0] > 0 || nums[len - 1] < 0) {
         return res
     }
+    var start = new Date()
     let i = 0;
     while (i < len - 2) {
         let first = i + 1;
@@ -32,9 +35,14 @@ var threeSum = function (nums) {
             } else {
                 while(first < last && nums[first] === nums[++first]);
             }
+            if (Date.now() - start > 1000) {
+                throw new Error('Loop running too long!')
+            }
         }
         while(nums[i] === nums[++i]);
     }
     return res;
 }
-
+console.log(threeSum([-2,0,1,1,2]))
+</script>
+</html>
