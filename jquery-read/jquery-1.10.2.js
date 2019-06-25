@@ -63,6 +63,7 @@ var
 
 	// Define a local copy of jQuery
 	// 定义jquery的本地副本
+	// 为了 能使用 $()
 	jQuery = function( selector, context ) {
 		// The jQuery object is actually just the init constructor 'enhanced'
 		return new jQuery.fn.init( selector, context, rootjQuery );
@@ -86,6 +87,7 @@ var
 
 	// Match a standalone tag
 	// 检查独立标签	网上	叫啥自闭和标签
+	// 应该是匹配纯html 不带属性的html ...
 	rsingleTag = /^<(\w+)\s*\/?>(?:<\/\1>|)$/,
 
 	// JSON RegExp
@@ -105,7 +107,7 @@ var
 	},
 
 	// The ready event handler
-	// 绑定事件 的 程序
+	// 绑定ready 事件 的 程序
 	completed = function( event ) {
 
 		// readyState === "complete" is good enough for us to call the dom ready in oldIE
@@ -115,7 +117,7 @@ var
 		}
 	},
 	// Clean-up method for dom ready events
-	// 清楚dom 事件 可以用在上边那个 绑定之前
+	// 清除 load 事件 可以用在上边那个 绑定之前
 	detach = function() {
 		if ( document.addEventListener ) {
 			document.removeEventListener( "DOMContentLoaded", completed, false );
@@ -131,7 +133,10 @@ jQuery.fn = jQuery.prototype = {
 	// The current version of jQuery being used
 	jquery: core_version,
 
+	// 指向构造函数 ?
 	constructor: jQuery,
+	// 初始化
+	// dom元素 上下文  固定的上下文 
 	init: function( selector, context, rootjQuery ) {
 		var match, elem;
 
@@ -144,13 +149,17 @@ jQuery.fn = jQuery.prototype = {
 		if ( typeof selector === "string" ) {
 			if ( selector.charAt(0) === "<" && selector.charAt( selector.length - 1 ) === ">" && selector.length >= 3 ) {
 				// Assume that strings that start and end with <> are HTML and skip the regex check
+				// 假设以<>开头和结尾的字符串是HTML，并跳过regex检查
 				match = [ null, selector, null ];
 
 			} else {
+				// exec() 方法在一个指定字符串中执行一个搜索匹配。返回一个结果数组或 null。
+				// 这个rquickExpr应该也是检查标签的 那种正常的开闭标签
 				match = rquickExpr.exec( selector );
 			}
 
 			// Match html or make sure no context is specified for #id
+			// 匹配HTML或确保没有为ID指定上下文
 			if ( match && (match[1] || !context) ) {
 
 				// HANDLE: $(html) -> $(array)
@@ -530,6 +539,9 @@ jQuery.extend({
 	// data: string of html
 	// context (optional): If specified, the fragment will be created in this context, defaults to document
 	// keepScripts (optional): If true, will include scripts passed in the html string
+	// 日期：HTML字符串
+	// 上下文（可选）：如果指定，将在此上下文中创建片段，默认为文档
+	// keepscripts（可选）：如果为true，则将包括HTML字符串中传递的脚本
 	parseHTML: function( data, context, keepScripts ) {
 		if ( !data || typeof data !== "string" ) {
 			return null;
@@ -1139,6 +1151,7 @@ var i,
 	rnative = /^[^{]+\{\s*\[native \w/,
 
 	// Easily-parseable/retrievable ID or TAG or CLASS selectors
+	// 易于解析/检索的ID、标记或类选择器
 	rquickExpr = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,
 
 	rinputs = /^(?:input|select|textarea|button)$/i,
