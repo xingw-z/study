@@ -10,57 +10,128 @@
     
 </body>
 <script>
+// 自己大概写的
+// var threeSumClosest = function(nums, target) {
+//     let i = 0;
+//     let len = nums.length;
+//     let ttt = nums[0] + nums[1] + nums[2];
+//     let qsort = arr => arr.length > 1 ? [...qsort(arr.filter(x => x < arr[0])), ...arr.filter(x => x === arr[0]), ...qsort(arr.filter(x => x > arr[0]))]: arr;
+//     nums = qsort(nums);
+//     function abss(a) {
+//         return (a^(a>>31))-(a>>31);
+//     }
+//     function cyfunc(a, b) {
+//         if (a>>31 === 0) {
+//             if (b>>31 === 0) {
+//                 return abss(a-b);
+//             } else {
+//                 return a - b;
+//             }
+//         } else {
+//             if (b>>31 === 0) {
+//                 return b - a;
+//             } else {
+//                 return abss(abss(a) - abss(b));
+//             }
+//         }
+//     }
+//     let tiao = false;
+//     while(i < len - 2) {
+//         let first = i + 1;
+//         let last = len - 1;
+//         while(first < last) {
+            
+//             let result = nums[i] + nums[first] + nums[last];
+//             console.log(result, nums[i], nums[first], nums[last]);
+//             if (result === target) {
+//                 ttt = result;
+//                 tiao = true;
+//                 break;
+//             }
+//             let _cy = cyfunc(result, target);
+//             let _cy2 = cyfunc(ttt, target);
+            
+//             if (_cy2 > _cy) {
+//                 ttt = result;
+//             }
+
+//             if (result > target) {
+//                 while(nums[last] === nums[--last]) {};
+//                 // last--;
+//             } else {
+//                 while(nums[first] === nums[++first]) {};
+//                 // first++;
+//             }
+//         }
+//         if (tiao) {
+//             break;
+//         }
+//         while(nums[i] === nums[++i]) {};
+//         // i++;
+//     }
+//     return ttt;
+// };
+
+// 力扣上的题解
+// var threeSumClosest = function(nums, target) {
+//     let i = 0;
+//     let len = nums.length;
+//     let ttt = nums[0] + nums[1] + nums[2];
+//     let qsort = arr => arr.length > 1 ? [...qsort(arr.filter(x => x < arr[0])), ...arr.filter(x => x === arr[0]), ...qsort(arr.filter(x => x > arr[0]))]: arr;
+//     nums = qsort(nums);
+//     function abss(a) {
+//         return (a^(a>>31))-(a>>31);
+//     }
+//     while (i < len - 2){
+//         let start = i + 1;
+//         let end = len - 1;
+//         while (start < end) {
+//             let sum = nums[i] + nums[start] + nums[end];
+//             if (Math.abs(target - sum) < Math.abs(target - ttt)) {
+//                 ttt = sum;
+//             }
+//             if (sum > target) {
+//                 end--;
+//             } else if (sum < target) {
+//                 start++;
+//             } else {
+//                 return sum;
+//             }
+//         }
+//         i++;
+//     }
+//     return ttt;
+// };
+
+// 自己改编的  好像时间复杂度慢了点 但是空间复杂度稍微好点
 var threeSumClosest = function(nums, target) {
     let i = 0;
     let len = nums.length;
     let ttt = nums[0] + nums[1] + nums[2];
-    function abss(a) {
-        return (a^(a>>31))-(a>>31);
-    }
-    function cyfunc(a, b) {
-        if (a>>31 === 0) {
-            if (b>>31 === 0) {
-                return abss(a-b);
+    // nums = nums.sort((x, y) => x - y);
+    let qsort = arr => arr.length > 1 ? [...qsort(arr.filter(x => x < arr[0])), ...arr.filter(x => x === arr[0]), ...qsort(arr.filter(x => x > arr[0]))]: arr;
+    nums = qsort(nums);
+    while (i < len - 2){
+        let start = i + 1;
+        let end = len - 1;
+        while (start < end) {
+            let sum = nums[i] + nums[start] + nums[end];
+            if (Math.abs(target - sum) < Math.abs(target - ttt)) {
+                ttt = sum;
+            }
+            if (sum > target) {
+                while(nums[end] === nums[--end]);
+            } else if (sum < target) {
+                while(nums[start] === nums[++start]);
             } else {
-                return a - b;
-            }
-        } else {
-            if (b>>31 === 0) {
-                return b - a;
-            } else {
-                
+                return sum;
             }
         }
-    }
-    let tiao = false;
-    while(i < len - 2) {
-        let first = i + 1;
-        let last = len - 1;
-        while(first < last) {
-            
-            let result = nums[i] + nums[first] + nums[last];
-            
-            if (result === 0) {
-                ttt = result;
-                tiao = true;
-                break;
-            }
-            let _cy = abss(result - target);
-            let _cy2 = abss(ttt - target);
-            console.log(result, target, ttt, _cy, _cy2);
-            if (_cy2 > _cy) {
-                ttt = result;
-            }
-
-            while(nums[first] === nums[++first]) {};
-        }
-        if (tiao) {
-            break;
-        }
-        while(nums[i] === nums[++i]) {};
+        while(nums[i] === nums[++i]);
     }
     return ttt;
 };
-console.log(threeSumClosest([1,1,-1,-1,3], -1));
+
+console.log(threeSumClosest([0,5,-1,-2,4,-1,0,-3,4,-5], 1));
 </script>
 </html>

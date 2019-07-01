@@ -12,34 +12,26 @@ var threeSumClosest = function(nums, target) {
     let i = 0;
     let len = nums.length;
     let ttt = nums[0] + nums[1] + nums[2];
-    function abss(a) {
-        return (a^(a>>31))-(a>>31);
-    }
-    let tiao = false;
-    while(i < len - 2) {
-        let first = i + 1;
-        let last = len - 1;
-        while(first < last) {
-            
-            let result = nums[i] + nums[first] + nums[last];
-            
-            if (result === 0) {
-                ttt = result;
-                tiao = true;
-                break;
+    // nums = nums.sort((x, y) => x - y);
+    let qsort = arr => arr.length > 1 ? [...qsort(arr.filter(x => x < arr[0])), ...arr.filter(x => x === arr[0]), ...qsort(arr.filter(x => x > arr[0]))]: arr;
+    nums = qsort(nums);
+    while (i < len - 2){
+        let start = i + 1;
+        let end = len - 1;
+        while (start < end) {
+            let sum = nums[i] + nums[start] + nums[end];
+            if (Math.abs(target - sum) < Math.abs(target - ttt)) {
+                ttt = sum;
             }
-            let _cy = abss(result - target);
-            let _cy2 = abss(ttt - target);
-            if (abss(_cy2) > abss(_cy)) {
-                ttt = result;
+            if (sum > target) {
+                while(nums[end] === nums[--end]);
+            } else if (sum < target) {
+                while(nums[start] === nums[++start]);
+            } else {
+                return sum;
             }
-
-            while(nums[first] === nums[++first]) {};
         }
-        if (tiao) {
-            break;
-        }
-        while(nums[i] === nums[++i]) {};
+        while(nums[i] === nums[++i]);
     }
     return ttt;
 };
