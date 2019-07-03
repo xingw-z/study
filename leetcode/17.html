@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>17</title>
+</head>
+<body>
+    
+</body>
+<script>
+var letterCombinations = function(digits) {
+    let obj = {
+        '2': ['a', 'b', 'c'],
+        '3': ['d', 'e', 'f'],
+        '4': ['g', 'h', 'i'],
+        '5': ['j', 'k', 'l'],
+        '6': ['m', 'n', 'o'],
+        '7': ['p', 'q', 'r', 's'],
+        '8': ['t', 'u', 'v'],
+        '9': ['w', 'x', 'y', 'z']
+    }
+    let arr = digits.split('');
+    let len = arr.length;
+    let list = [];
+    for (let i = 0; i < len; i++) {
+        list.push(obj[arr[i]]);
+    }
+    let res = [];
+    for (let i = 0, iLen = list.length; i < iLen; i++) {
+        const iEle = list[i];
+        console.log('123')
+        for (let j = 0, jLen = iEle.length; j < jLen; j++) {
+            // console.log(j, i)
+        }
+    }
+    return list;
+};
+
+console.log(letterCombinations('23'))
+</script>
+</html>
