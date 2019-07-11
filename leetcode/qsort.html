@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>qsort</title>
+</head>
+<body>
+</body>
+<script>
+var arr = [6, 1, 2, 7, 9, 3, 4, 5, 10, 8];
+// function qsort(left, right) {
+//     if (left > right) return;
+//     let temp = a[left];
+//     let i = left, j = right;
+//     while( i != j) {
+//         while(a[j] >= temp && i<j) j--;
+//         while(a[i] <= temp && i<j) i++;
+//         if (i<j) {
+//             temp = a[i];
+//             a[i] = a[j];
+//             a[j] = temp;
+//         } 
+//         a[left] = a[i];
+//         a[i] = temp;
+//         qsort(left, i-1);
+//         qsort(i + 1, right);
+//         return ;
+//     }
+// }
+// qsort(1, a.length);
+// console.log(a)
+var start = new Date();
+function qsort(arr) {
+    if (arr.length === 1) {
+        return arr[0];
+    }
+    let left = 1, right = arr.length - 1;
+    let temp = arr[0];
+    while(left < right) {
+        while(left < right && arr[right] >= temp) {
+            right--;
+        }
+        while(left < right && arr[left] <= temp) {
+            left++;
+        }
+        let t = arr[left];
+        arr[left] = arr[right];
+        arr[right] = t;
+        
+        if (Date.now() - start > 1000) {
+            throw new Error('Loop running too long!')
+        }
+    }
+    
+    let t = arr[left];
+    arr[left] = arr[0];
+    arr[0] = t;
+    qsort(arr.slice(0, left));
+    qsort(arr.slice(left, arr.length));
+    // return [...qsort(arr.slice(0, left)), arr[left], ...qsort(arr.slice(left + 1, arr.length))];
+}
+console.log(qsort(arr), arr)
+</script>
+</html>

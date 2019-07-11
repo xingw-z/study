@@ -12,6 +12,7 @@
 <script>
 var letterCombinations = function(digits) {
     let obj = {
+        "1": [],
         '2': ['a', 'b', 'c'],
         '3': ['d', 'e', 'f'],
         '4': ['g', 'h', 'i'],
@@ -21,21 +22,8 @@ var letterCombinations = function(digits) {
         '8': ['t', 'u', 'v'],
         '9': ['w', 'x', 'y', 'z']
     }
-    let arr = digits.split('');
-    let len = arr.length;
-    let list = [];
-    for (let i = 0; i < len; i++) {
-        list.push(obj[arr[i]]);
-    }
-    let res = [];
-    for (let i = 0, iLen = list.length; i < iLen; i++) {
-        const iEle = list[i];
-        console.log('123')
-        for (let j = 0, jLen = iEle.length; j < jLen; j++) {
-            // console.log(j, i)
-        }
-    }
-    return list;
+    
+    return [];
 };
 
 console.log(letterCombinations('23'))
