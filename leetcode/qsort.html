@@ -31,10 +31,9 @@ var arr = [6, 1, 2, 7, 9, 3, 4, 5, 10, 8];
 // }
 // qsort(1, a.length);
 // console.log(a)
-var start = new Date();
 function qsort(arr) {
-    if (arr.length === 1) {
-        return arr[0];
+    if (arr.length <= 1) {
+        return arr;
     }
     let left = 1, right = arr.length - 1;
     let temp = arr[0];
@@ -48,19 +47,13 @@ function qsort(arr) {
         let t = arr[left];
         arr[left] = arr[right];
         arr[right] = t;
-        
-        if (Date.now() - start > 1000) {
-            throw new Error('Loop running too long!')
-        }
     }
     
     let t = arr[left];
     arr[left] = arr[0];
     arr[0] = t;
-    qsort(arr.slice(0, left));
-    qsort(arr.slice(left, arr.length));
-    // return [...qsort(arr.slice(0, left)), arr[left], ...qsort(arr.slice(left + 1, arr.length))];
+    return [...qsort(arr.slice(0, left)), arr[left], ...qsort(arr.slice(left + 1, arr.length))];
 }
-console.log(qsort(arr), arr)
+console.log(qsort(arr))
 </script>
 </html>
