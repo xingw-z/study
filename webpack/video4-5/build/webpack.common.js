@@ -82,10 +82,10 @@ module.exports = {
 			automaticNameMaxLength: 30,
 			name: true,
 			cacheGroups: {
-				vendors: {
+				www: {
 					test: /[\\/]node_modules[\\/]/,
 					priority: -10,
-					filename: 'asdsad.js'
+					filename: '[name].js'
 				},
 				default: {
 					minChunks: 2,
