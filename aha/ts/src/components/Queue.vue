@@ -30,7 +30,7 @@ export default class HelloWorld extends Vue {
       q.data[q.tail] = list[i];
       q.tail++;
     }
-    console.log(q.data);
+    // console.log(q.data);
     
     
 
@@ -45,9 +45,41 @@ export default class HelloWorld extends Vue {
       q.tail++;
       q.head++;
     }
-    console.log(arr);
+    // console.log(arr);
+    
+    this.test1()
+  }
+
+  private test1 () {
+    interface queue {
+      data: Array<number>;
+      head: number;
+      tail: number;
+    }
+    let q1 :queue = {
+      data: [],
+      head: 0,
+      tail: 0,
+    }
+    let q2 :queue = {
+      data: [],
+      head: 0,
+      tail: 0,
+    }
+    let input1 :Array<number> = [2, 4, 1, 2, 5, 6];
+    let input2 :Array<number> = [3, 1, 3, 5, 6, 4];
+    let i :number = 0;
+
+    for (i = 0; i < input1.length; i++) {
+      q1.data.push(input1[q1.tail++]);
+    }
+
+    for (i = 0; i < input2.length; i++) {
+      q2.data.push(input2[q2.tail++]);
+    }
     
     
+
   }
 }
 </script>

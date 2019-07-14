@@ -3,6 +3,7 @@
     <img alt="Vue logo" src="../assets/logo.png">
     <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/> -->
     <Queue></Queue>
+    <Stack></Stack>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import Queue from '@/components/Queue.vue';
+import Stack from '@/components/Stack.vue';
 
 @Component({
   components: {
     HelloWorld,
     Queue,
+    Stack,
   },
 })
 export default class Home extends Vue {
