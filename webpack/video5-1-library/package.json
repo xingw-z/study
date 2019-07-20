@@ -1,0 +1,17 @@
+{
+  "name": "video5-1-library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "xx",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6"
+  }
+}
