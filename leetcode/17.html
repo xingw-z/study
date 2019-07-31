@@ -10,21 +10,124 @@
     
 </body>
 <script>
+// var letterCombinations = function(digits) {
+//     // let obj = {
+//     //     "1": [],
+//     //     '2': ['a', 'b', 'c'],
+//     //     '3': ['d', 'e', 'f'],
+//     //     '4': ['g', 'h', 'i'],
+//     //     '5': ['j', 'k', 'l'],
+//     //     '6': ['m', 'n', 'o'],
+//     //     '7': ['p', 'q', 'r', 's'],
+//     //     '8': ['t', 'u', 'v'],
+//     //     '9': ['w', 'x', 'y', 'z']
+//     // }
+//     let phone = {
+//         "2": "abc",
+//         "3": "def",
+//         "4": "ghi",
+//         "5": "jkl",
+//         "6": "mno",
+//         "7": "pqrs",
+//         "8": "tuv",
+//         "9": "wxyz",
+//     }
+    
+//     let output = [];
+
+//     function backtrack(zh, next_digits) {
+//         if (next_digits.length === 0) {
+//             output.push(zh)
+//         } else {
+//             let digit = next_digits.substring(0, 1);
+//             let letters = phone[digit];
+//             for(let i = 0; i < letters.length; i++) {
+//                 let letter = phone[digit].substring(i, i + 1);
+//                 backtrack(zh + letter, next_digits.substring(1));
+//             }
+//         }
+//     }
+
+//     function fff(d) {
+//         if (d.length != 0) {
+//             backtrack('', d)
+//         }
+//         return output;
+//     }
+    
+//     return fff(digits);
+// };
+
+
+// var letterCombinations = function(digits) {
+//     let phone = {
+//         "2": "abc",
+//         "3": "def",
+//         "4": "ghi",
+//         "5": "jkl",
+//         "6": "mno",
+//         "7": "pqrs",
+//         "8": "tuv",
+//         "9": "wxyz",
+//     }
+//     let arr = [];
+//     function dg(zfc, dd) {
+//         if (dd.length == 0) {
+//             arr.push(zfc);
+//         } else {
+//             let tgz = dd.substring(0, 1);
+//             let azfc = phone[tgz];
+//             for (let i = 0; i < azfc.length; i++) {
+//                 let ddt = azfc.substring(i, i+1);
+//                 dg(zfc + ddt, dd.substring(1));
+//             }
+//         }
+//     }
+    
+//     dg('', digits);
+//     return arr
+// };
+
+
 var letterCombinations = function(digits) {
-    let obj = {
-        "1": [],
-        '2': ['a', 'b', 'c'],
-        '3': ['d', 'e', 'f'],
-        '4': ['g', 'h', 'i'],
-        '5': ['j', 'k', 'l'],
-        '6': ['m', 'n', 'o'],
-        '7': ['p', 'q', 'r', 's'],
-        '8': ['t', 'u', 'v'],
-        '9': ['w', 'x', 'y', 'z']
+
+    let phone = {
+        "2": "abc",
+        "3": "def",
+        "4": "ghi",
+        "5": "jkl",
+        "6": "mno",
+        "7": "pqrs",
+        "8": "tuv",
+        "9": "wxyz",
     }
     
-    return [];
+    let output = [];
+
+    function backtrack(zh, next_digits) {
+        if (next_digits.length === 0) {
+            output.push(zh)
+        } else {
+            let digit = next_digits.substring(0, 1);
+            let letters = phone[digit];
+            for(let i = 0; i < letters.length; i++) {
+                let letter = phone[digit].substring(i, i + 1);
+                backtrack(zh + letter, next_digits.substring(1));
+            }
+        }
+    }
+
+    function func(d) {
+        if (d.length != 0) {
+            backtrack('', d)
+        }
+        return output;
+    }
+    
+    return func(digits);
 };
+
+
 
 console.log(letterCombinations('23'))
 </script>
