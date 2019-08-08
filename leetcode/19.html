@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>19</title>
+</head>
+<body>
+</body>
+<script>
+var removeNthFromEnd = function(head, n) {
+    let list = [];
+    while(1) {
+        list.push(head);
+        head = head.next;
+        if (head === null) {
+            break;
+        } else if(head.next === null) {
+            list.push(head);
+            break;
+        }
+    }
+    let len = list.length;
+    if (len < 1) {
+        return null;
+    } else if (len === 1) {
+        if (n === 1) {
+            return null;
+        } else {
+            return list[0];
+        }
+    } else if(len === n) {
+        return list[1];
+    }
+    
+    list[len - n - 1].next = list[len - n + 1];
+    return list[0];
+};
+
+function ListNode(val) {
+    this.val = val;
+    this.next = null;
+}
+let _node1 = new ListNode(1);
+let _node2 = new ListNode(2);
+// let _node3 = new ListNode(3);
+_node1.next = _node2;
+// _node2.next = _node3;
+
+console.log(removeNthFromEnd(_node1, 2));
+</script>
+</html>

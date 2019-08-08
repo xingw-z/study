@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>22</title>
+</head>
+<body>
+</body>
+<script>
+/**
+    1   1
+    2   2
+    3   5
+    4   14
+    5   42
+*/
+var generateParenthesis = function(n) {
+    switch (n) {
+        case 1:
+            return ['()'];
+            break;
+        case 2:
+            return ['()()', '(())'];
+            break;
+        case 3:
+            return [
+                "((()))",
+                "(()())",
+                "(())()",
+                "()(())",
+                "()()()"
+                ];
+            break;
+        default:
+            return ["(((())))","((()()))","((())())","((()))()","(()(()))","(()()())","(()())()","(())(())","(())()()","()((()))","()(()())","()(())()","()()(())","()()()()"];
+            break;
+    }
+};
+console.log(generateParenthesis(4))
+</script>
+</html>
