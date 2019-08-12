@@ -16,28 +16,67 @@
     4   14
     5   42
 */
+// var generateParenthesis = function(n) {
+//     let str = '', left = '', right = '';
+//     for (let i = 0; i < n; i++) {
+//         left += '(';
+//         right += ')';
+//     }
+//     str = left + right;
+//     return str;
+// };
+
+// var generateParenthesis = function(n) {
+//     function generate(a = []) {
+//         if (a.length == 2 * n) {
+//             if (valid(a)) {
+//                 ans.push(a.join(''));
+//             } 
+//         } else {
+//             a.push('(');
+//             generate(a);
+//             a.pop();
+//             a.push(')');
+//             generate(a);
+//             a.pop();
+//         }
+//     }
+//     function valid(a) {
+//         let bal = 0;
+//         for (const c in a) {
+//             if (a.hasOwnProperty(c)) {
+//                 const element = a[c];
+//                 if (element== '(') {
+//                     bal += 1;
+//                 } else {
+//                     bal -= 1;
+//                 }
+//                 if (bal < 0) {
+//                     return false
+//                 }
+//             }
+//         }
+//         return bal == 0;
+//     }
+//     let ans = [];
+//     generate();
+//     return ans;
+// }
+
 var generateParenthesis = function(n) {
-    switch (n) {
-        case 1:
-            return ['()'];
-            break;
-        case 2:
-            return ['()()', '(())'];
-            break;
-        case 3:
-            return [
-                "((()))",
-                "(()())",
-                "(())()",
-                "()(())",
-                "()()()"
-                ];
-            break;
-        default:
-            return ["(((())))","((()()))","((())())","((()))()","(()(()))","(()()())","(()())()","(())(())","(())()()","()((()))","()(()())","()(())()","()()(())","()()()()"];
-            break;
+    let ans = [];
+    function backtrack(s = '', left = 0, right = 0) {
+        if (s.length == 2 * n) {
+            ans.push(s)
+            return 
+        }
+        if (left < n) {
+            backtrack(s + '(', left + 1, right)
+        }
+        // if ()
     }
-};
+    return ans;
+}
 console.log(generateParenthesis(4))
 </script>
 </html>
