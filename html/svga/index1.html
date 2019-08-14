@@ -27,12 +27,13 @@
             top: 0;
             left: 0;
             z-index: 9999;
+            color: #fff;
         }
 
     </style>
 </head>
 <body>
-    <div class="ddd">asd</div>
+    <div class="ddd">逊哥专属</div>
     <!-- <div class="demoCanvas" id="demoCanvas"></div> -->
     <div class="demoCanvas" id="demoCanvas"></div>
     <!-- <div src="test.svga" loops="0" clearsAfterStop="true" style="width: 100%;height: 100%;overflow: hidden;position: relative;"></div> -->
@@ -59,7 +60,7 @@
     var player = new SVGA.Player('#demoCanvas')
 
     // 解析 SVGA 文件
-    parser.load('./test.svga', function (videoItem) {
+    parser.load('./bg_home.svga', function (videoItem) {
         // 设置 & 播放动画
         console.log(videoItem)
         let _val = videoItem.videoSize.width / _width;
