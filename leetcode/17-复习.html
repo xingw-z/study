@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>17-复习</title>
+</head>
+<body>
+</body>
+<script>
+var letterCombinations = function(digits) {
+    var obj = {
+        '2': 'abc',
+        '3': 'def',
+        '4': 'ghi',
+        '5': 'jkl',
+        '6': 'mno',
+        '7': 'pqrs',
+        '8': 'tuv',
+        '9': 'wxyz'
+    }
+    let len = digits.length;
+    if (len <= 0) return [];
+    let arr = [];
+    function func(d, str = '') {
+        if (d.length <= 0) {
+            arr.push(str)
+        } else {
+            let x = obj[d[0]];
+            for (let i = 0; i < x.length; i++) {
+                func(d.slice(1), str+x[i])
+            }
+        }
+    }
+    func(digits)
+    return arr;
+};
+
+console.log(letterCombinations('23'));
+</script>
+</html>
