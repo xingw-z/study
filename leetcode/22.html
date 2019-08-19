@@ -73,10 +73,35 @@ var generateParenthesis = function(n) {
         if (left < n) {
             backtrack(s + '(', left + 1, right)
         }
-        // if ()
+        if (right < left) {
+            backtrack(s + ')', left, right + 1)
+        }
     }
+    backtrack();
     return ans;
 }
+
+// var generateParenthesis = function(n) {
+//     if (n === 0) return [''];
+//     let ans = [];
+//     for (let i = 0; i < n; i++) {
+//         let _arri = generateParenthesis(i)
+//         for (let j = 0; j < _arri.length; j++) {
+//             let _arrj = generateParenthesis(n - 1 - i);
+//             for (let k = 0; k < _arrj.length; k++) {
+//                 ans.push('(' + _arri[j] + ')' + _arrj[k])
+//             }
+//         }
+//     }
+//     return ans;
+// }
+// 第三种是将任意的 n  转换成 ( left ) + right   keft + right 为 n - 1  因为 left 已经有个括号包着它了 而为什么采用这种方式
+// 下面摘抄自答案里的评论
+// 这里要说一下为什么要ans.add("(" + left + ")" + right); 而不是ans.add(left+right)呢, 应该是因为有一种特殊的情况 如果left right(n=4) 全是()() 
+// 这种分隔的小括号 则当1,3== 2,2 == 3,1 就会出现()()()()重复出现多次的情况, 而上面那种做法可以将()()()()的情况放到left=0,rigint=3的情况中,
+// 且只会出现一次, 非常nice
+
 console.log(generateParenthesis(4))
+
 </script>
 </html>
