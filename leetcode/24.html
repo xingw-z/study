@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>24</title>
+</head>
+<body>
+</body>
+<script>
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+function ListNode(val) {
+    this.val = val;
+    this.next = null;
+}
+var a = new ListNode(1);
+var b = new ListNode(2);
+var c = new ListNode(3);
+var d = new ListNode(4);
+a.next = b;
+b.next = c;
+c.next = d;
+var swapPairs = function(head) {
+    if (!head || head.next == null) {
+        return head
+    }
+    let list = [];
+    while(head !== null) {
+        list.push(head);
+        head = head.next;
+    }
+    let len = list.length;
+    if (len & 1) {
+        len = len - 1
+    }
+    for (let i = 0; i < len; i = i + 2) {
+        list[i].next =  list[i+1].next;
+        list[i+1].next = list[i];
+        if (i != 0) {
+            list[i - 2].next = list[i+1];
+        }
+    }
+    return list[1];
+};
+swapPairs(a)
+</script>
+</html>
