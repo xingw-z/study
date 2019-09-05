@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>chain</title>
+</head>
+
+<body>
+</body>
+<script>
+    // function add(x) {
+    //     let count = x;
+    //     function _b(n) {
+    //         count = count + n
+    //         return _b
+    //     }
+    //     _b.valueOf = function() {
+    //         return count
+    //     }
+    //     _b.toString = function() {
+    //         return count + ''
+    //     }
+    //     return _b
+    // }
+    // console.log(add(1)(2)(3))
+
+
+    
+    function Test(name) {
+        this.task = [];
+        let fn = () => {
+            console.log(name);
+            this.next();
+        }
+        this.task.push(fn);
+        setTimeout(() => {
+            this.next();
+        }, 0)
+        return this;
+    }
+
+    Test.prototype.firstSleep = function (timer) {
+        // console.time("firstSleep")
+        let that = this;
+        let fn = () => {
+            setTimeout(() => {
+                // console.timeEnd("firstSleep");
+                console.log("firstSleep")
+                that.next();
+            }, timer * 1000)
+        }
+        this.task.unshift(fn);
+        return this;
+    }
+
+    Test.prototype.sleep = function (timer) {
+        // console.time("sleep")
+        let that = this;
+        let fn = () => {
+            setTimeout(() => {
+                // console.timeEnd("sleep");
+                console.log("sleep")
+                that.next();
+            }, timer * 1000)
+        }
+        this.task.push(fn);
+        return this;
+    }
+
+    Test.prototype.eat = function (dinner) {
+        let that = this;
+        let fn = () => {
+            console.log(dinner);
+            that.next();
+        }
+        this.task.push(fn);
+        return this;
+    }
+
+    Test.prototype.next = function (dinner) {
+        let fn = this.task.shift();
+        fn && fn()
+    }
+
+    // new Test("test").firstSleep(3)
+    new Test("test").firstSleep(3).sleep(5).eat("dinner")
+
+</script>
+
+</html>
