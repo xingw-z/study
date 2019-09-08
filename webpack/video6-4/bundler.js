@@ -1,0 +1,73 @@
+const fs = require('fs')
+const path = require('path')
+const parser = require('@babel/parser')
+const traverse = require('@babel/traverse').default
+const babel = require('@babel/core')
+
+const moduleAnalyser = (filename) => {
+    const content = fs.readFileSync(filename, 'utf-8')
+    const ast = parser.parse(content, {
+        sourceType: 'module'
+    })
+
+    const dependencies = {}
+
+    traverse(ast, {
+        ImportDeclaration({ node }) {
+            // console.log(node)
+            const dirname = path.dirname(filename)
+            const newFile = './' + path.join(dirname, node.source.value)
+            dependencies[node.source.value] = newFile
+            // dependencies.push(node.source.value)
+        }
+    })
+
+    // console.log(dependencies)
+
+    // console.log(content)
+    // console.log(ast.program.body)
+    const { code } = babel.transformFromAst(ast, null, {
+        presets: ["@babel/preset-env"]
+    })
+    // console.log(code)
+    return {
+        filename,
+        dependencies,
+        code
+    }
+}
+
+const makeDependenciesGraph = (entry) => {
+    const entryModule = moduleAnalyser(entry)
+    const graphArray = [ entryModule ]
+
+    for (let i = 0; i < graphArray.length; i++) {
+        const item = graphArray[i]
+        const { dependencies } = item
+
+        if (dependencies) {
+            for (let j in dependencies) {
+                graphArray.push(moduleAnalyser(dependencies[j]))
+            }
+        }
+
+    }
+
+    const graph = {}
+    graphArray.forEach(item => {
+        graph[item.filename] = {
+            dependencies: item.dependencies,
+            code: item.code
+        }
+    })
+
+    return graph
+    // console.log(graph)
+    // console.log(graphArray)
+}
+
+const graphInfo = makeDependenciesGraph('./src/index.js')
+// console.log(graphInfo)
+
+// const moduleInfo = moduleAnalyser('./src/index.js')
+// console.log(moduleInfo)
