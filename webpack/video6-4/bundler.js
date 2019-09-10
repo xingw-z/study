@@ -66,7 +66,29 @@ const makeDependenciesGraph = (entry) => {
     // console.log(graphArray)
 }
 
-const graphInfo = makeDependenciesGraph('./src/index.js')
+const generateCode = (entry) => {
+    const graph = JSON.stringify(makeDependenciesGraph(entry))
+    return `
+        (function(graph){
+            function require(module) {
+                function localRequire(relativePath) {
+                    return require(graph[module].dependencies[relativePath])
+                }
+                var exports = {};
+                (function(require, exports, code) {
+                    eval(code)
+                })(localRequire, exports, graph[module].code)
+                return exports
+            }
+            require('${entry}')
+        })(${graph})
+    `
+}
+
+const code = generateCode('./src/index.js')
+console.log(code)
+
+// const graphInfo = makeDependenciesGraph('./src/index.js')
 // console.log(graphInfo)
 
 // const moduleInfo = moduleAnalyser('./src/index.js')
