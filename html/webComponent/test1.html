@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>web component test1</title>
+</head>
+<body>
+    <!-- <template id="custom-template">
+        <h1>HTML Templates are rad</h1>
+   </template> -->
+   <template id="custom-template">
+    <p><slot name="custom-text">We can put whatever we want here!</slot></p>
+</template>
+
+   <div id="container">
+   </div>
+</body>
+
+<script>
+const template = document.getElementById("custom-template");
+const templateContent = template.content;
+const container = document.getElementById("container");
+// const templateInstance = templateContent.cloneNode(true);
+const templateInstance = templateContent;
+container.appendChild(templateInstance);
+
+</script>
+</html>
