@@ -1,2 +1,1 @@
-# study
-学习的记录
+各种尝试的demo，和刷leetcode的记录
