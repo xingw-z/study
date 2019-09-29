@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _test_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./test.css */ \"./test.css\");\n/* harmony import */ var _test_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_test_css__WEBPACK_IMPORTED_MODULE_0__);\n\n\nvar _app = document.createElement('div');\n\n_app.id = 'app';\n\n\n_app.innerHTML = 'hello xxx'\n\ndocument.body.append(_app);\n\n\nconsole.log('hello xxx');\n\n//# sourceURL=webpack:///./index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _test_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./test.css */ \"./test.css\");\n/* harmony import */ var _test_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_test_css__WEBPACK_IMPORTED_MODULE_0__);\n\r\n\r\nvar _app = document.createElement('div');\r\n\r\n_app.id = 'app';\r\n\r\n\r\n_app.innerHTML = 'hello xxx'\r\n\r\ndocument.body.append(_app);\r\n\r\n\r\nconsole.log('hello xxx');\n\n//# sourceURL=webpack:///./index.js?");
 
 /***/ }),
 
@@ -105,7 +105,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _tes
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"#app{\\n    width: 100px;\\n    height: 100px;\\n    background-color: yellow;\\n}\", \"\"]);\n\n\n//# sourceURL=webpack:///./test.css?./node_modules/css-loader/dist/cjs.js");
+eval("exports = module.exports = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"#app{\\r\\n    width: 100px;\\r\\n    height: 100px;\\r\\n    background-color: yellow;\\r\\n}\", \"\"]);\n\n\n//# sourceURL=webpack:///./test.css?./node_modules/css-loader/dist/cjs.js");
 
 /***/ }),
 
