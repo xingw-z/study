@@ -7,7 +7,6 @@ class CopyrightWebpackPlugin {
             console.log('compile')
         })
         compiler.hooks.emit.tapAsync('CopyrightWebpackPlugin', (compilation, cb) => {
-            debugger
             compilation.assets['copyright.txt'] = {
                 source: function() {
                     return 'copyright by xx'
