@@ -1,0 +1,2 @@
+const allowApi = ['/signup', '/signin'];
+
