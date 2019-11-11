@@ -44,9 +44,7 @@ _axios.interceptors.response.use(
   function(error) {
     // Do something with response error
     console.log(error, '接口返回 error')
-    if (error.code === '5000') {
-      vueRouter.push({ name: 'login' })
-    }
+    vueRouter.push({ name: 'login' })
     return Promise.reject(error);
   }
 );
