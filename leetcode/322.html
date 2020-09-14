@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>322</title>
+</head>
+
+<body>
+    322. 零钱兑换
+</body>
+<script>
+    var coinChange = function (coins, amount) {
+        if (amount === 0) return 0
+        let ans = Number.MAX_SAFE_INTEGER
+        coins.sort((x, y) => x - y)
+        function cc(amount, c_index, count) {
+            if (amount === 0) {
+                ans = Math.min(ans, count)
+                return
+            }
+            if (c_index < 0) {
+                return 
+            }
+            for (let k = Math.floor(amount/coins[c_index]); k >= 0 && k + count < ans; k--) {
+                cc(amount - k * coins[c_index], c_index - 1, count + k)
+                console.log(k, amount - k * coins[c_index], c_index - 1, count + k)
+            }
+        }
+        cc(amount, coins.length - 1, 0)
+        return ans === Number.MAX_SAFE_INTEGER ? -1 : ans
+    };
+    console.log(coinChange([1, 2, 5], 11))
+</script>
+
+</html>
