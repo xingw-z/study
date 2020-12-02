@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>game1</title>
+    <style>
+        canvas {
+            border: black solid 1px;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<canvas id="canvas" width="1000" height="600"></canvas>
+
+<body>
+
+</body>
+<script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    var raf;
+    var running = false;
+    let totalClearBlockNum = 20
+
+    var ball = {
+        x: 100,
+        y: 500,
+        vx: 5,
+        vy: -3,
+        radius: 10,
+        color: 'blue',
+        draw: function () {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+            ctx.closePath();
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+    };
+
+    function clear() {
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    class ClearBlock {
+        constructor(x, y, width, height) {
+            this.x = x
+            this.y = y
+            this.width = width
+            this.height = height
+            this.isDie = false
+            this.color = `rgb(${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)})`
+        }
+        draw() {
+            if (this.isDie) return false
+            ctx.beginPath()
+            ctx.fillStyle = this.color
+            ctx.fillRect(this.x, this.y, this.width, this.height)
+        }
+        clear() {
+            this.isDie = true
+            ctx.fillRect(this.x, this.y, this.width, this.height)
+        }
+    }
+    let clearBlockList = []
+
+    for (let i = 0, j = -1; i < totalClearBlockNum; i++) {
+        let _x = (i % 7 + 1) * 120
+        if (i % 7 === 0) {
+            j++
+        }
+        let _y = 30 * (j + 1)
+        clearBlockList.push(new ClearBlock(_x, _y, 100, 20))
+    }
+
+    function draw() {
+        clear();
+        ball.draw();
+        block.draw()
+
+        let isClearCollision = false
+
+        let positionCollision = ''
+
+        for (let i = 0, len = clearBlockList.length; i < len; i++) {
+            const element = clearBlockList[i]
+            if (!element.isDie && circleRectCollision(ball, element)) {
+                element.clear()
+                isClearCollision = true
+                positionCollision = positionCollisionHandler(ball, element)
+                console.log()
+            }
+            if (!element.isDie) element.draw()
+        }
+
+        if (positionCollision === 'top' || positionCollision === 'down') {
+            ball.vy = -ball.vy
+        }
+        
+        if (positionCollision === 'left' || positionCollision === 'right') {
+            ball.vx = -ball.vx
+        }
+
+        ball.x += ball.vx;
+        ball.y += ball.vy;
+
+        if (block.x > (1000 - block.width)) {
+            block.x = 1000 - block.width
+        }
+
+        let isMeCollision = circleRectCollision(ball, block)
+
+        
+
+        if (ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0 || isMeCollision) {
+            if (ball.y + ball.vy > canvas.height) {
+                alert('go die 啦 再来亿把')
+                init()
+                return false
+            }
+            ball.vy = -ball.vy
+        }
+        if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
+            ball.vx = -ball.vx
+        }
+
+
+        if (block.x < 0) {
+            block.x = 0
+        }
+
+        raf = window.requestAnimationFrame(draw);
+    }
+
+    let block = {
+        x: 450,
+        y: 500,
+        width: 100,
+        height: 10,
+        color: 'black',
+        draw: function () {
+            ctx.beginPath()
+            ctx.fillStyle = this.color
+            ctx.fillRect(this.x, this.y, this.width, this.height)
+        }
+    }
+
+    canvas.addEventListener('mousemove', function (e) {
+        block.x = e.offsetX - 50
+        block.draw()
+    })
+
+    draw()
+
+    function init() {
+        clearBlockList = []
+        for (let i = 0, j = -1; i < totalClearBlockNum; i++) {
+            let _x = (i % 7 + 1) * 120
+            if (i % 7 === 0) {
+                j++
+            }
+            let _y = 100 * (j + 1)
+            clearBlockList.push(new ClearBlock(_x, _y, 100, 20))
+        }
+        ball = {
+            x: 100,
+            y: 500,
+            vx: 5,
+            vy: -3,
+            radius: 10,
+            color: 'blue',
+            draw: function () {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+                ctx.closePath();
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+        block = {
+            x: 450,
+            y: 500,
+            width: 100,
+            height: 10,
+            color: 'black',
+            draw: function () {
+                ctx.beginPath()
+                ctx.fillStyle = this.color
+                ctx.fillRect(this.x, this.y, this.width, this.height)
+            }
+        }
+        draw()
+    }
+    // 判断 圆 和 方块是否碰撞
+    function circleRectCollision(circle, rect) {
+        // 找出矩形距离圆心最近的点
+        const closestPoint = {
+            x: 0,
+            y: 0
+        }
+        if (circle.x < rect.x) {
+            closestPoint.x = rect.x
+        } else if (circle.x > rect.x + rect.width) {
+            closestPoint.x = rect.x + rect.width
+        } else {
+            closestPoint.x = circle.x
+        }
+        if (circle.y < rect.y) {
+            closestPoint.y = rect.y
+        } else if (circle.y > rect.y + rect.height) {
+            closestPoint.y = rect.y + rect.height
+        } else {
+            closestPoint.y = circle.y
+        }
+        // 算出圆心离这个点的距离
+        const distance = Math.sqrt(Math.pow(closestPoint.x - circle.x, 2) + Math.pow(closestPoint.y - circle.y, 2))
+        return distance < circle.radius
+    }
+    // 判断圆在哪个位置碰到方块
+    function positionCollisionHandler(circle, rect) {
+        if (circle.y < rect.y) {
+            return 'top'
+        } else if (circle.y > rect.y + rect.height) {
+            return 'down'
+        } else {
+            if (circle.x < rect.x) {
+                return 'left'
+            } else if (circle.x > rect.x + rect.width) {
+                return 'right'
+            } else {
+                return ''
+            }
+        }
+    }
+
+
+
+</script>
+
+</html>
