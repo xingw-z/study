@@ -26,21 +26,7 @@
     var running = false;
     let totalClearBlockNum = 20
 
-    var ball = {
-        x: 100,
-        y: 500,
-        vx: 5,
-        vy: -3,
-        radius: 10,
-        color: 'blue',
-        draw: function () {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-            ctx.closePath();
-            ctx.fillStyle = this.color;
-            ctx.fill();
-        }
-    };
+    var ball = {}
 
     function clear() {
         ctx.fillStyle = 'rgba(255,255,255,0.3)';
@@ -137,25 +123,14 @@
         raf = window.requestAnimationFrame(draw);
     }
 
-    let block = {
-        x: 450,
-        y: 500,
-        width: 100,
-        height: 10,
-        color: 'black',
-        draw: function () {
-            ctx.beginPath()
-            ctx.fillStyle = this.color
-            ctx.fillRect(this.x, this.y, this.width, this.height)
-        }
-    }
+    let block = {}
 
     canvas.addEventListener('mousemove', function (e) {
         block.x = e.offsetX - 50
         block.draw()
     })
 
-    draw()
+    init()
 
     function init() {
         clearBlockList = []
@@ -164,14 +139,14 @@
             if (i % 7 === 0) {
                 j++
             }
-            let _y = 100 * (j + 1)
+            let _y = 30 * (j + 1)
             clearBlockList.push(new ClearBlock(_x, _y, 100, 20))
         }
         ball = {
             x: 100,
             y: 500,
             vx: 5,
-            vy: -3,
+            vy: -4,
             radius: 10,
             color: 'blue',
             draw: function () {
@@ -181,7 +156,7 @@
                 ctx.fillStyle = this.color;
                 ctx.fill();
             }
-        }
+        };
         block = {
             x: 450,
             y: 500,
