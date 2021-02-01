@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fj</title>
+    <style>
+        canvas {
+            border: black solid 1px;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="512" height="768"></canvas>
+    <!-- <img src="./oldFeiji/b1.png" alt="" srcset=""> -->
+</body>
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const canvasWidth = 512 // 整个画布宽度
+    const canvasHeight = 768 // 整个画布长度
+    const myPlaneWidth = 160  // 我的飞机宽度
+    const myPlaneHeight = 139  // 我的飞机高度
+    const myBulletWidth = 29    // 我的子弹宽度
+    const myBulletHeight = 47   // 我的子弹高度
+    // 子弹类
+    class Bullet {
+        constructor(x, y, width, height, src) {
+            this.width = width
+            this.height = height
+            this.img = new Image()
+            this.x = x
+            this.y = y
+            this.firstY = y
+            this.loadFlag = false
+            this.img.onload = () => {
+                ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+                this.loadFlag = true
+            }
+            this.img.src = src
+        }
+        draw() {
+            if (this.loadFlag) {
+                ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+            }
+        }
+    }
+
+    // 我的子弹类
+    // 29 * 47
+    class MyBullet extends Bullet {
+        constructor(x, y, width, height, src) {
+            super(x, y, width, height, src)
+            this.speed = 10
+            // 是否可以删除
+            this.deleteFlag = false
+            // 是否可以下一个子弹
+            this.canNextFlag = false
+        }
+        move() {
+            if (this.y <= 0) {
+                this.deleteFlag = true
+                return false
+            }
+            this.y = this.y - this.speed
+            // 当子弹运行的长度超过自身长度时 才可以释放下一个子弹
+            if (Math.abs(this.firstY - this.y) > myPlaneHeight) {
+                this.canNextFlag = true
+            }
+        }
+    }
+    // 飞机类
+    class Plane {
+        constructor(x, y, width, height, src) {
+            this.width = width
+            this.height = height
+            this.img = new Image()
+            this.x = x
+            this.y = y
+            this.loadFlag = false
+            this.img.onload = () => {
+                ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+                this.loadFlag = true
+            }
+            this.img.src = src
+        }
+        draw() {
+            if (this.loadFlag) {
+                ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+            }
+        }
+    }
+    // 我的飞机类
+    // my 160 * 139
+    class MyPlane extends Plane {
+        constructor(x, y, width, height, src) {
+            super(x, y, width, height, src)
+            this.speed = 10
+        }
+        upHandler() {
+            if (this.y <= 0) return false
+            this.y = this.y - this.speed
+        }
+        downHandler() {
+            if (this.y >= 629) return false
+            this.y = this.y + this.speed
+        }
+        leftHandler() {
+            if (this.x <= 0) return false
+            this.x = this.x - this.speed
+        }
+        rightHandler() {
+            if (this.x >= 352) return false
+            this.x = this.x + this.speed
+        }
+    }
+    // 背景类
+    class Background {
+        constructor() {
+            this.width = canvasWidth
+            this.height = canvasHeight
+            this.loadFlag = false
+            this.img = new Image()
+            this.y1 = 0
+            this.y2 = -768
+            this.speed = 5
+            this.img.onload = () => {
+                ctx.drawImage(this.img, 0, this.y1, this.width, this.height)
+                ctx.drawImage(this.img, 0, this.y2, this.width, this.height)
+                this.loadFlag = true
+            }
+            this.img.src = './oldFeiji/bg.jpg'
+        }
+        draw() {
+            if (this.loadFlag) {
+                this.y1 = this.y1 + this.speed
+                this.y2 = this.y2 + this.speed
+                if (this.y1 > this.height) {
+                    this.y1 = 0
+                    this.y2 = -768
+                }
+                ctx.drawImage(this.img, 0, this.y1, this.width, this.height)
+                ctx.drawImage(this.img, 0, this.y2, this.width, this.height)
+            }
+        }
+    }
+    // 初始化背景
+    let _background = new Background()
+    // 初始化我的飞机
+    const _myPlane = new MyPlane(176, 500, myPlaneWidth, myPlaneHeight, './oldFeiji/f1.png')
+    // 我的子弹是否开启
+    let _myBulletOepnFlag = false
+    // 存放我的子弹数组
+    let _myBulletList = []
+
+    // 渲染函数
+    function draw() {
+        clear()
+        _background.draw()
+        _myPlane.draw()
+
+        // 开启子弹后 开始装填子弹
+        if (_myBulletOepnFlag) {
+            if (_myBulletList.length < 7) {
+                if (_myBulletList.length === 0 || _myBulletList[_myBulletList.length - 1].canNextFlag) {
+                    _myBulletList.push(new MyBullet(_myPlane.x + ((myPlaneWidth - myBulletWidth) / 2), _myPlane.y - myBulletWidth, myBulletWidth, myBulletHeight, './oldFeiji/b1.png'))
+                }   
+            }
+
+            for (let i = 0, len = _myBulletList.length; i < len; i++) {
+                const element = _myBulletList[i]
+                if (!element) break
+                element.draw()
+                element.move()
+                if (element.deleteFlag) {
+                    _myBulletList.splice(i, 1)
+                }
+            }
+        } else {
+            _myBulletList = []
+        }
+
+        window.requestAnimationFrame(draw)
+    }
+    // 清除页面函数
+    function clear() {
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight)
+    }
+
+    // 初始化函数
+    function init() {
+        draw()
+        let _timer = null
+        function move(e) {
+            if (e.keyCode === 38) {
+                _myPlane.upHandler()
+            } else if (e.keyCode === 40) {
+                _myPlane.downHandler()
+            } else if (e.keyCode === 37) {
+                _myPlane.leftHandler()
+            } else if (e.keyCode === 39) {
+                _myPlane.rightHandler()
+            }
+        }
+        document.addEventListener('keydown', function (e) {
+            if (e.keyCode === 32) {
+                _myBulletOepnFlag = !_myBulletOepnFlag
+                return false
+            }
+            if (_timer !== null) return false
+            move(e)
+            clearInterval(_timer)
+            _timer = setInterval(() => {
+                move(e)
+            }, 30)
+        })
+        document.addEventListener('keyup', function (e) {
+            clearInterval(_timer)
+            _timer = null
+        })
+    }
+
+    init()
+</script>
+
+</html>
