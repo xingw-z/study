@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bfs</title>
+</head>
+
+<body>
+    <script>
+        function TreeNode(val) {
+            this.val = val;
+            this.left = this.right = null;
+        }
+        var a10 = new TreeNode(10)
+        var a9 = new TreeNode(9)
+        var a8 = new TreeNode(8)
+        var a7 = new TreeNode(7)
+        var a6 = new TreeNode(6)
+        var a5 = new TreeNode(5)
+        var a4 = new TreeNode(4)
+        var a3 = new TreeNode(3)
+        var a2 = new TreeNode(2)
+        var a1 = new TreeNode(1)
+        a1.left = a2
+        a1.right = a3
+        a2.right = a4
+        a3.left = a5
+        a3.right = a6
+        a4.left = a7
+        a4.right = a8
+        a5.right = a9
+        a6.left = a10
+        console.log(a1)
+
+        function PrintFromTopToBottom(root) {
+            const result = [];
+            const queue = [];
+            if (root) {
+                queue.push(root);
+                while (queue.length > 0) {
+                    const current = queue.shift();
+                    if (current.left) {
+                        queue.push(current.left);
+                    }
+                    if (current.right) {
+                        queue.push(current.right);
+                    }
+                    result.push(current.val);
+                }
+            }
+            return result;
+        }
+
+        function Print(root) {
+            const result = [];
+            const queue = [];
+            let tempArr = [];
+            let currentNums = 1;
+            let childNums = 0;
+            if (root) {
+                queue.push(root);
+                while (queue.length > 0) {
+                    const current = queue.shift();
+                    if (current.left) {
+                        queue.push(current.left);
+                        childNums++;
+                    }
+                    if (current.right) {
+                        queue.push(current.right);
+                        childNums++;
+                    }
+                    tempArr.push(current.val);
+                    currentNums--;
+                    if (currentNums === 0) {
+                        currentNums = childNums;
+                        childNums = 0;
+                        result.push(tempArr);
+                        tempArr = [];
+                    }
+                }
+            }
+            return result;
+        }
+
+        function zPrint(root) {
+            const result = [];
+            const oddStack = [];
+            const evenStack = [];
+            let temp = [];
+            if (root) {
+                oddStack.push(root);
+                while (oddStack.length > 0 || evenStack.length > 0) {
+
+                    while (oddStack.length > 0) {
+                        const current = oddStack.pop();
+                        temp.push(current.val);
+                        if (current.left) {
+                            evenStack.push(current.left);
+                        }
+                        if (current.right) {
+                            evenStack.push(current.right);
+                        }
+                    }
+                    if (temp.length > 0) {
+                        result.push(temp);
+                        temp = [];
+                    }
+
+                    while (evenStack.length > 0) {
+                        const current = evenStack.pop();
+                        temp.push(current.val);
+                        if (current.right) {
+                            oddStack.push(current.right);
+                        }
+                        if (current.left) {
+                            oddStack.push(current.left);
+                        }
+                    }
+                    if (temp.length > 0) {
+                        result.push(temp);
+                        temp = [];
+                    }
+
+                }
+            }
+            return result;
+        }
+        console.log(zPrint(a1))
+    </script>
+</body>
+
+</html>
