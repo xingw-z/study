@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符串的排列</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function Permutation(str) {
+        let result = []
+        PermutationCore(result, str.split(''))
+        return [ ...new Set(result) ]
+    }
+    function PermutationCore(result, quque, current = '', temp = '') {
+        current = current + temp
+        if (quque.length === 0) {
+            result.push(current)
+            return result
+        }
+        for (let i = 0, len = quque.length; i < len; i++) {
+            temp = quque.shift()
+            PermutationCore(result, quque, current, temp)
+            quque.push(temp)
+        }
+    }
+    console.log(Permutation('abc'))
+</script>
+</html>
