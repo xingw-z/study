@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>122</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // var maxProfit = function (prices) {
+
+    //     if (prices.length <= 1) return 0
+    //     let dp0 = 0
+    //     let dp1 = -prices[0]
+    //     let len = prices.length
+    //     for (let i = 1; i < len; i++) {
+    //         dp0 = Math.max(dp0, dp1 + prices[i])
+    //         dp1 = Math.max(dp1, dp0 - prices[i])
+    //     }
+    //     return dp0
+    // };
+    var maxProfit = function (prices) {
+
+        if (prices.length <= 1) return 0
+        let sum = 0
+        for (let i = 1, len = prices.length; i < len; i++) {
+            sum = sum + Math.max(0, prices[i] - prices[i - 1])
+        }
+        return sum
+    };
+    console.log(maxProfit([7, 1, 5, 3, 6, 4]))
+</script>
+
+</html>

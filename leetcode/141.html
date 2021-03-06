@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>141</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function ListNode(val) {
+        this.val = val;
+        this.next = null;
+    }
+    var a = new ListNode(3)
+    var b = new ListNode(2)
+    var c = new ListNode(0)
+    var d = new ListNode(4)
+    var e = new ListNode(2)
+    a.next = b
+    b.next = c
+    c.next = d
+    d.next = e
+    
+    var hasCycle = function (head) {
+        const _map = new Map()
+        var start = new Date()
+        while (head !== null && head.next !== null) {
+            if (Date.now() - start > 1000) {
+                throw new Error('Loop running too long!')
+            }
+            if (_map.get(head)) {
+                return true
+            }
+            _map.set(head, true)
+            head = head.next
+        }
+        return false
+    };
+    console.log(hasCycle(a))
+</script>
+
+</html>
