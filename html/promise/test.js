@@ -1,30 +1,31 @@
-const PENDING = 'pending'
-const FULFILLED = 'fulfilled'
-const REJECTED = 'rejected'
+const PENDING = 'PENDING'
+const FULFILLED = 'FULFILLED'
+const REJECTED = 'REJECTED'
 
-function MyPromise(executor) {
-    const self = this
-    self.onFulfilled = []
-    self.onRejected = []
-    self.status = PENDING
+function MyPromise(func) {
+    const that = this
+    that.status = PENDING
+    that.onFulfilled = []
+    that.onRejected = []
+
     function resolve(value) {
-        if (self.status === PENDING) {
-            self.status = FULFILLED
-            self.value = value
-            self.onFulfilled.forEach(fn => fn())
+        if (that.status === PENDING) {
+            that.status = FULFILLED
+            that.value = value
+            that.onFulfilled.forEach(fn => fn())
         }
     }
 
     function reject(reason) {
-        if (self.status === PENDING) {
-            self.status = REJECTED
-            self.reason = reason
-            self.onRejected.forEach(fn => fn())
+        if (that.status === PENDING) {
+            that.status = REJECTED
+            that.reason = reason
+            that.onRejected.forEach(fn => fn())
         }
     }
 
     try {
-        executor(resolve, reject)
+        func(resolve, reject)
     } catch (e) {
         reject(e)
     }
@@ -33,41 +34,43 @@ function MyPromise(executor) {
 MyPromise.prototype.then = function (onFulfilled, onRejected) {
     onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => value
     onRejected = typeof onRejected === 'function' ? onRejected : reason => { throw reason }
-    const self = this
+
+    const that = this
+
     let promise2 = new MyPromise((resolve, reject) => {
-        if (self.status === FULFILLED) {
+        if (that.status === FULFILLED) {
             setTimeout(() => {
                 try {
-                    let x = onFulfilled(self.value)
+                    let x = onFulfilled(that.value)
                     resolvePromise(promise2, x, resolve, reject)
                 } catch (e) {
                     reject(e)
                 }
             })
-        } else if (self.status === REJECTED) {
+        } else if (that.status === REJECTED) {
             setTimeout(() => {
                 try {
-                    let x = onRejected(self.reason)
+                    let x = onRejected(that.reason)
                     resolvePromise(promise2, x, resolve, reject)
                 } catch (e) {
                     reject(e)
                 }
             })
-        } else if (self.status === PENDING) {
-            self.onFulfilled.push(() => {
+        } else if (that.status === PENDING) {
+            that.onFulfilled.push(() => {
                 setTimeout(() => {
                     try {
-                        let x = onFulfilled(self.value)
+                        let x = onFulfilled(that.value)
                         resolvePromise(promise2, x, resolve, reject)
                     } catch (e) {
                         reject(e)
                     }
                 })
             })
-            self.onRejected.push(() => {
+            that.onRejected.push(() => {
                 setTimeout(() => {
                     try {
-                        let x = onRejected(self.reason)
+                        let x = onRejected(that.reason)
                         resolvePromise(promise2, x, resolve, reject)
                     } catch (e) {
                         reject(e)
@@ -81,10 +84,10 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
 
 function resolvePromise(promise2, x, resolve, reject) {
     if (promise2 === x) {
-        reject(new TypeError('Chaining cycle'))
+        reject(new TypeError('chaining cycle'))
     }
-    let used
     if (x && typeof x === 'object' || typeof x === 'function') {
+        let used
         try {
             let then = x.then
             if (typeof then === 'function') {
@@ -92,10 +95,10 @@ function resolvePromise(promise2, x, resolve, reject) {
                     if (used) return
                     used = true
                     resolvePromise(promise2, y, resolve, reject)
-                }, err => {
+                }, e => {
                     if (used) return
                     used = true
-                    reject(err)
+                    reject(e)
                 })
             } else {
                 if (used) return
@@ -112,7 +115,12 @@ function resolvePromise(promise2, x, resolve, reject) {
     }
 }
 
-module.exports = MyPromise;
+
+
+MyPromise.prototype.catch = function (onRejected) {
+    return this.then(null, onRejected)
+}
+
 
 MyPromise.defer = MyPromise.deferred = function () {
     let dfd = {};
@@ -122,3 +130,5 @@ MyPromise.defer = MyPromise.deferred = function () {
     });
     return dfd;
 }
+
+module.exports = MyPromise;
