@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>705</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /**
+     * Initialize your data structure here.
+     */
+    var MyHashSet = function () {
+        this.map = {}
+    };
+
+    /** 
+     * @param {number} key
+     * @return {void}
+     */
+    MyHashSet.prototype.add = function (key) {
+        this.map[key] = true
+    };
+
+    /** 
+     * @param {number} key
+     * @return {void}
+     */
+    MyHashSet.prototype.remove = function (key) {
+        delete this.map[key]
+    };
+
+    /**
+     * Returns true if this set contains the specified element 
+     * @param {number} key
+     * @return {boolean}
+     */
+    MyHashSet.prototype.contains = function (key) {
+        return !!this.map[key]
+    };
+
+    /**
+     * Your MyHashSet object will be instantiated and called as such:
+     * var obj = new MyHashSet()
+     * obj.add(key)
+     * obj.remove(key)
+     * var param_3 = obj.contains(key)
+     */
+</script>
+
+</html>
