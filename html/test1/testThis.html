@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test this</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    "use strict"
+    var a = 2
+    function btest() {
+        console.log(this.a)
+    }
+    var c = {
+        a: 3,
+        test() {
+
+        }
+    }
+    var d = {
+        a: 4
+    }
+    const testfunc = btest.bind(c)
+    // testfunc.apply(d)
+
+    class Arrow {
+        test = () => {
+            return this
+        }
+    }
+
+    var arr = new Arrow()
+    var brr = new Arrow()
+    // console.log(arr.test() === arr, brr === arr)
+
+    var e = {
+        a: 5,
+        test() {
+            console.log(this, this.a)
+        }
+    }
+    // e.test()
+
+    function f1() {
+        console.log(this)
+    }
+    f1.call(d)
+    console.log(this)
+</script>
+
+</html>
