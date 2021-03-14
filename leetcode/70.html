@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>70</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var climbStairs = function (n) {
+        if (n < 4) return n
+        if (!this.hash) this.hash = {}
+        if (this.hash[n]) return this.hash[n]
+        let list = [1,2,3]
+        for (let i = 3; i < n; i++) {
+            list.push(list[i - 1] + list[i - 2])
+        }
+        const val = list[list.length - 1]
+        this.hash[n] = val
+        return val
+    };
+</script>
+
+</html>

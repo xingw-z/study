@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>102</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /**
+     * Definition for a binary tree node.
+     *  */
+    function TreeNode(val, left, right) {
+        this.val = (val === undefined ? 0 : val)
+        this.left = (left === undefined ? null : left)
+        this.right = (right === undefined ? null : right)
+    }
+
+    /**
+     * @param {TreeNode} root
+     * @return {number[][]}
+     */
+    var a3 = new TreeNode(3)
+    var a9 = new TreeNode(9)
+    var a20 = new TreeNode(20)
+    var a15 = new TreeNode(15)
+    var a7 = new TreeNode(7)
+    var a88 = new TreeNode(88)
+    a3.left = a9
+    a3.right = a20
+    a20.left = a15
+    a20.right = a7
+    var levelOrder = function (root) {
+        let _list = []
+        function recu(node, index) {
+            if (!node || !node.val && node.val !== 0) return
+            if (!Array.isArray(_list[index])) _list[index] = []
+            _list[index].push(node.val)
+            recu(node.left, index + 1)
+            recu(node.right, index + 1)
+        }
+        recu(root, 0)
+        return _list
+    };
+    console.log(levelOrder(a3))
+</script>
+
+</html>
