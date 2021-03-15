@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>testDomEvent</title>
+</head>
+
+<body>
+    <div class="test">asd</div>
+</body>
+<script>
+    var a = document.querySelector('.test')
+    function test1() {
+        console.log('test1')
+    }
+    function test2() {
+        console.log('test2')
+    }
+    a.addEventListener('click', test2)
+    a.onclick = test1
+    
+</script>
+</html>
