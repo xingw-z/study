@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1603</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /**
+     * @param {number} big
+     * @param {number} medium
+     * @param {number} small
+     */
+    var ParkingSystem = function (big, medium, small) {
+        this.big = big
+        this.medium = medium
+        this.small = small
+    };
+
+    /** 
+     * @param {number} carType
+     * @return {boolean}
+     */
+    ParkingSystem.prototype.addCar = function (carType) {
+        if (carType === 1) {
+            if (this.big > 0) {
+                this.big = this.big - 1
+                return true
+            }
+            return false
+        }
+        if (carType === 2) {
+            if (this.medium > 0) {
+                this.medium = this.medium - 1
+                return true
+            }
+            return false
+        }
+        if (carType === 3) {
+            if (this.small > 0) {
+                this.small = this.small - 1
+                return true
+            }
+            return false
+        }
+        return false
+    };
+
+    /**
+     * Your ParkingSystem object will be instantiated and called as such:
+     * var obj = new ParkingSystem(big, medium, small)
+     * var param_1 = obj.addCar(carType)
+     */
+</script>
+
+</html>

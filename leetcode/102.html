@@ -35,19 +35,38 @@
     a3.right = a20
     a20.left = a15
     a20.right = a7
-    var levelOrder = function (root) {
-        let _list = []
-        function recu(node, index) {
-            if (!node || !node.val && node.val !== 0) return
-            if (!Array.isArray(_list[index])) _list[index] = []
-            _list[index].push(node.val)
-            recu(node.left, index + 1)
-            recu(node.right, index + 1)
+    // var levelOrder = function (root) {
+    //     let _list = []
+    //     function recu(node, index) {
+    //         if (!node || !node.val && node.val !== 0) return
+    //         if (!Array.isArray(_list[index])) _list[index] = []
+    //         _list[index].push(node.val)
+    //         recu(node.left, index + 1)
+    //         recu(node.right, index + 1)
+    //     }
+    //     recu(root, 0)
+    //     return _list
+    // };
+    // console.log(levelOrder(a3))
+    function PrintFromTopToBottom(root) {
+        const result = [];
+        const queue = [];
+        if (root) {
+            queue.push(root);
+            while (queue.length > 0) {
+                const current = queue.shift();
+                if (current.left) {
+                    queue.push(current.left);
+                }
+                if (current.right) {
+                    queue.push(current.right);
+                }
+                result.push(current.val);
+            }
         }
-        recu(root, 0)
-        return _list
-    };
-    console.log(levelOrder(a3))
+        return result;
+    }
+    console.log(PrintFromTopToBottom(a3))
 </script>
 
 </html>
