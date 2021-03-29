@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>132</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 先选一个最小值 然后从左遍历到右
+    // 但是从1 开始 到 len -1
+    // 每次循环 都判断拿一下最小值
+    // 然后每次 当前只要比最小值大 就在进一个判断
+    // 便宜 从当前到后面 比当前值小的 有一个 就符合 判断了
+    // var find132pattern = function (nums) {
+    //     let len = nums.length
+    //     if (len < 3) return false
+    //     let leftMin = nums[0]
+    //     for (let i = 1; i < len - 1; i++) {
+    //         if (nums[i] > leftMin) {
+    //             for (let j = i + 1; j < len; j++) {
+    //                 if (nums[i] > nums[j] && nums[j] > leftMin) {
+    //                     return true
+    //                 } 
+    //             }
+    //         }
+    //         leftMin = Math.min(leftMin, nums[i])
+    //     }
+    //     return false
+    // };
+    // 建一个 栈  放 2 的数据  初始化先放一个 len - 1  的数进去
+    // 然后 一个变量 存 2 最大值 但是这个值的初始值是js 最小的整数
+    // 循环开始 从倒数第二个开始 往前 循环 如果  当前值比最大值大 就符合  当然第一次肯定不走这里
+    // 第一次 会先判断 当前值有没有 栈里的数据大
+    // 有的话 那就符合了 3  这时候 就把max 设置为这个值
+    // 然后从栈里把他去掉  这时候就有了 符合 3 和 符合 2的
+    // 就是 max 有值的时候  证明 已经有 符合的 3和 2 了  前面说过 max是符合 2里边最大值
+    // 所以 如果新碰到的元素 是 小于 max 的 也就是 符合1 了
+    // 就为true
+    var find132pattern = function (nums) {
+        let len = nums.length
+        if (len < 3) return false
+        let max = Number.MIN_SAFE_INTEGER
+        let rightList = [nums[len - 1]]
+        for (let i = len - 2; i >= 0; i--) {
+            if (max > nums[i]) {
+                return true
+            } 
+            while (rightList.length && nums[i] > rightList[rightList.length - 1]) {
+                max = rightList[rightList.length - 1]
+                rightList.pop()
+            }
+            if (nums[i] > max) rightList.push(nums[i])
+        }
+        return false
+    };
+    console.log(find132pattern([2, 3, 1]))
+</script>
+
+</html>

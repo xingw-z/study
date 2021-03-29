@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>341</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var NestedIterator = function (nestedList) {
+        const that = this
+        that.list = []
+        function getList(list) {
+            for (let item of list) {
+                if (item.isInteger()) {
+                    that.list.push(item.getInteger())
+                } else {
+                    getList(item.getList())
+                }
+            }
+        }
+
+        getList(nestedList)
+    };
+
+
+    /**
+     * @this NestedIterator
+     * @returns {boolean}
+     */
+    NestedIterator.prototype.hasNext = function () {
+        return this.list.length !== 0
+    };
+
+    /**
+     * @this NestedIterator
+     * @returns {integer}
+     */
+    NestedIterator.prototype.next = function () {
+        return this.list.shift()
+    };
+
+
+    // console.log(NestedIterator([[1,1],2,[1,1]]))
+    var i = new NestedIterator([[1, 1], 2, [1, 1]]), a = []
+    while (i.hasNext()) a.push(i.next())
+    console.log(a)
+</script>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>191</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 自己写的
+    // var hammingWeight = function (n) {
+    //     if (!n) return n
+    //     let sum = 0
+    //     while (1) {
+    //         if (n % 2 === 1) sum++
+    //         n = Math.floor(n / 2)
+    //         if (n === 1) {
+    //             sum++
+    //             break
+    //         }
+    //         if (n === 0) break
+    //     }
+    //     return sum
+    // };
+    // 首先 1 << i 就是 把当前这个1 进到那一位
+    // 比如 1 << 4 就是进到 1000
+    // 这样 n & 这个数时 如果大于0 那么n在这一位就有一个1 
+    // 等于0 那n这一位就是0
+    // var hammingWeight = function (n) {
+    //     let sum = 0
+    //     for (let i = 0; i < 32; i++) {
+    //         if ((n & (1 << i)) !== 0) sum++
+    //     }
+    //     return sum
+    // };
+    // 这个更刺激了
+    // 举个例子 比如 6 & (6 - 1)
+    // 那就是110 & 101 结果就是100  4
+    // 就是相当于 一个数 位与一个数的-1  他们二进制位就会始终少一个1
+    // 所以sum++ 少到后面 0 就完了
+    var hammingWeight = function (n) {
+        let sum = 0
+        while (n) {
+            n = n & (n - 1)
+            sum++
+        }
+        return sum
+    };
+    console.log(hammingWeight(11))
+</script>
+
+</html>
