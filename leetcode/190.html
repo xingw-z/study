@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>190</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var reverseBits = function (n) {
+        n = n.toString(2)
+        if (n.length < 32) {
+            for (let i = 0, len = 32 - n.length; i < len; i++) {
+                n = '0' + n
+            }
+        }
+        let res = ''
+        for (let i = 31; i >= 0; i--) {
+            res = res + n[i]
+        }
+        return parseInt(res, 2)
+    };
+</script>
+
+</html>
