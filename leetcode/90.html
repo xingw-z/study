@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>90</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var subsetsWithDup = function (nums) {
+        let list = [[]]
+        const hash = {}
+        for (let i = 0, iLen = nums.length; i < iLen; i++) {
+            for (let j = 0; j < i; j++) {
+                if (hash[nums[j]]) {
+                    
+                } else {
+                    hash[nums[j]] = true
+                    let _list = list.slice()
+                    for (let k = 0, kLen = _list.length; k < kLen; k++) {
+                        list.push([ ..._list[k], nums[j] ])
+                    }
+                } 
+            }
+        }
+        list = list.filter(item)
+        return list
+    };
+    console.log(subsetsWithDup([1,2,2]))
+</script>
+
+</html>
