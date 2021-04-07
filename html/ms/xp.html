@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+awse
+</body>
+<script>
+    const obj = {
+
+        id: 'abc',
+
+        nes: { ted: { value: true } },
+
+        other: { nested: { stuff: 5 } },
+
+        some: { array: [{ a: 1 }, 'B'] }
+
+    };
+
+    function dot(obj, name) {
+        if (!dot.hash) dot.hash = {}
+        let hash = {}
+        const keys = Object.keys(obj)
+        let isArray = Array.isArray(obj)
+        if (isArray) {
+            name = name ? name : ''
+        } else {
+            name = name ? name + '.' : ''
+        }
+        for (let i = 0, len = keys.length; i < len; i++) {
+            if (typeof obj[keys[i]] === 'object') {
+                if (isArray) {
+                    // hash = {...hash, ...dot(obj[keys[i]], `${name}[${keys[i]}]`)}
+                    dot(obj[keys[i]], `${name}[${keys[i]}]`)
+                } else {
+                    // hash = {...hash, ...dot(obj[keys[i]], name + keys[i])}
+                    dot(obj[keys[i]], name + keys[i])
+                }
+            } else {
+                if (isArray) {
+                    dot.hash[`${name}[${keys[i]}]`] = obj[keys[i]]
+                } else {
+                    dot.hash[name + keys[i]] = obj[keys[i]]
+                }
+            }
+        }
+        return dot.hash
+    }
+
+
+    const dotObj = dot(obj);
+
+    console.log(dotObj)
+
+</script>
+
+</html>
