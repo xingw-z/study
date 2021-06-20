@@ -9,8 +9,14 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+func checkErr(err error) {
+	if err != nil {
+		// panic(err)
+	}
+}
+
 func main() {
-	db, err := sql.Open("mysql", "astaxie:astaxie@/test?charset=utf8")
+	db, err := sql.Open("mysql", "xxmsu:xxmsp@3306(47.52.95.132)/test?charset=utf8")
 	checkErr(err)
 
 	//插入数据
@@ -67,10 +73,4 @@ func main() {
 
 	db.Close()
 
-}
-
-func checkErr(err error) {
-	if err != nil {
-		panic(err)
-	}
 }
