@@ -11,12 +11,12 @@ import (
 
 func checkErr(err error) {
 	if err != nil {
-		// panic(err)
+		panic(err)
 	}
 }
 
 func main() {
-	db, err := sql.Open("mysql", "xxmsu:xxmsp@3306(47.52.95.132)/test?charset=utf8")
+	db, err := sql.Open("mysql", "xxmsu:xxmsp@tcp(47.52.95.132:3306)/test?charset=utf8")
 	checkErr(err)
 
 	//插入数据
