@@ -24,20 +24,14 @@ func main() {
 	db.SetMaxOpenConns(10)
 	db.SetMaxIdleConns(10)
 
-	rows, err := db.Query("SELECT * FROM userinfo")
+	//插入数据
+	// stmt, err := db.Prepare("INSERT INTO ddd SET ddd=?")
+	stmt, err := db.Prepare("INSERT INTO userinfo SET username=?,department=?,created=?")
 	checkErr(err)
-	for rows.Next() {
-		var uid int
-		var username string
-		var department string
-		var created string
-		err = rows.Scan(&uid, &username, &department, &created)
-		checkErr(err)
-		fmt.Println(uid)
-		fmt.Println(username)
-		fmt.Println(department)
-		fmt.Println(created)
-	}
 
-	// fmt.Println(rows)
+	// res, err := stmt.Exec("我日")
+	res, err := stmt.Exec("astaxie", "研发部门", "2012-12-09")
+	checkErr(err)
+
+	fmt.Println(res)
 }

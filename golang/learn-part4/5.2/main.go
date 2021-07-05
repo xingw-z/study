@@ -69,8 +69,6 @@ func main() {
 	affect, err = res.RowsAffected()
 	checkErr(err)
 
-	fmt.Println(affect)
-
 	db.Close()
 
 }
