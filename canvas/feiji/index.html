@@ -16,7 +16,7 @@
 
 <body>
     <canvas id="canvas" width="512" height="768"></canvas>
-    <!-- <img src="./oldFeiji/b1.png" alt="" srcset=""> -->
+    <!-- <img src="./oldFeiji/f2.png" alt="" srcset=""> -->
 </body>
 <script>
     const canvas = document.getElementById('canvas');
@@ -27,6 +27,9 @@
     const myPlaneHeight = 139  // 我的飞机高度
     const myBulletWidth = 29    // 我的子弹宽度
     const myBulletHeight = 47   // 我的子弹高度
+    const enemyWidth = 82  // 敌机宽度
+    const enemyHeight = 67  // 敌机高度
+    const enemyNum = 4 // 敌机数量
     // 子弹类
     class Bullet {
         constructor(x, y, width, height, src) {
@@ -118,6 +121,30 @@
             this.x = this.x + this.speed
         }
     }
+
+    // 敌机类
+    // 82 * 67
+    class EnemyPlane extends Plane {
+        constructor(x, y, width, height, src) {
+            super(x, y, width, height, src)
+            this.speed = 3
+        }
+        draw() {
+            if (this.loadFlag) {
+                this.y = this.y + this.speed
+                ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+                if (this.y > (canvasHeight + enemyHeight)) {
+                    this.reborn()
+                }
+            }
+        }
+        reborn() {
+            this.y = 0
+            this.x = enemyPlaneRandomX()
+        }
+    }
+
+
     // 背景类
     class Background {
         constructor() {
@@ -151,7 +178,13 @@
     // 初始化背景
     let _background = new Background()
     // 初始化我的飞机
-    const _myPlane = new MyPlane(176, 500, myPlaneWidth, myPlaneHeight, './oldFeiji/f1.png')
+    let _myPlane = new MyPlane(176, 500, myPlaneWidth, myPlaneHeight, './oldFeiji/f1.png')
+    // 初始化敌机
+    const _enemyPlaneList = [] 
+    for (let i = 0; i < enemyNum; i++) {
+        _enemyPlaneList.push(new EnemyPlane(enemyPlaneRandomX(), 0, enemyWidth, enemyHeight, './oldFeiji/f2.png'))
+    }
+    // const _testenemyPlane = new EnemyPlane(250, 0, enemyWidth, enemyHeight, './oldFeiji/f2.png')
     // 我的子弹是否开启
     let _myBulletOepnFlag = false
     // 存放我的子弹数组
@@ -162,7 +195,16 @@
         clear()
         _background.draw()
         _myPlane.draw()
-
+        for (let i = 0, len = _enemyPlaneList.length; i < len; i++) {
+            const element = _enemyPlaneList[i]
+            element.draw()
+            if (handleCollision(element, _myPlane)) {
+                alert('嗝屁了铁汁！')
+                window.location.reload()
+                return 
+            }
+        }
+        
         // 开启子弹后 开始装填子弹
         if (_myBulletOepnFlag) {
             if (_myBulletList.length < 7) {
@@ -176,6 +218,14 @@
                 if (!element) break
                 element.draw()
                 element.move()
+
+                for (let i = 0, len = _enemyPlaneList.length; i < len; i++) {        
+                    if (handleCollision(element, _enemyPlaneList[i])) {
+                        _enemyPlaneList[i].reborn()
+                        console.log('打中了 成了！');
+                    }
+                }
+
                 if (element.deleteFlag) {
                     _myBulletList.splice(i, 1)
                 }
@@ -222,6 +272,19 @@
             clearInterval(_timer)
             _timer = null
         })
+    }
+
+    // 敌机 出现位置 x 随机
+    function enemyPlaneRandomX () {
+        return ~~((canvasWidth - enemyWidth) * Math.random())
+    }
+    
+    // 碰撞检测
+    function handleCollision(rect1, rect2) {
+        return rect1.x < rect2.x + rect2.width &&
+            rect1.x + rect1.width > rect2.x &&
+            rect1.y < rect2.y + rect2.height &&
+            rect1.height + rect1.y > rect2.y
     }
 
     init()

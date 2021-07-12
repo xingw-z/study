@@ -15,16 +15,17 @@
     </style>
 </head>
 <canvas id="canvas" width="1000" height="600"></canvas>
-
+<button class="start">开始</button>
 <body>
 
 </body>
 <script>
-    var canvas = document.getElementById('canvas');
+    var canvas = document.querySelector('#canvas');
     var ctx = canvas.getContext('2d');
     var raf;
     var running = false;
     let totalClearBlockNum = 20
+    const startBtn = document.querySelector('.start')
 
     var ball = {}
 
@@ -130,7 +131,7 @@
         block.draw()
     })
 
-    init()
+    
 
     function init() {
         clearBlockList = []
@@ -213,7 +214,10 @@
         }
     }
 
-
+    startBtn.addEventListener('click', function () {
+        init()
+        startBtn.style.display = 'none'
+    })
 
 </script>
 
