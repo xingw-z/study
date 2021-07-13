@@ -13,6 +13,32 @@
       this.left = left === undefined ? null : left;
       this.right = right === undefined ? null : right;
     }
+    // 速度更快的一种解法
+    // function height(node) {
+    //   if (!node) {
+    //     return 0;
+    //   } else {
+    //     const leftHeight = height(node.left);
+    //     const rightHeight = height(node.right);
+    //     if (
+    //       leftHeight === -1 ||
+    //       rightHeight === -1 ||
+    //       Math.abs(leftHeight - rightHeight) > 1
+    //     ) {
+    //       return -1;
+    //     } else {
+    //       return Math.max(height(node.left), height(node.right)) + 1;
+    //     }
+    //   }
+    // }
+
+    // /**
+    //  * @param {TreeNode} root
+    //  * @return {boolean}
+    //  */
+    // var isBalanced = function (root) {
+    //   return height(root) >= 0;
+    // };
 
     function height(node) {
       if (!node) {
