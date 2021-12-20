@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/quill/2.0.0-dev.4/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/quill/2.0.0-dev.4/quill.js"></script>
+</head>
+
+<body>
+    <!--引入样式表-->
+
+
+
+    <!-- 创建容器 -->
+    <div id="editor">
+
+    </div>
+    <!-- 引入Quill -->
+
+
+    <!-- Initialize Quill editor -->
+    <script>
+        var quill = new Quill('#editor', {
+            theme: 'snow',
+            table: true,
+        });
+        quill.clipboard.addMatcher('table ul', function (node, delta) {
+            console.log(node, 'node')
+            // return new Delta().insert(node.data);
+            return delta;
+        });
+        quill.clipboard.dangerouslyPasteHTML(`
+            <ul>
+                <li>li1</li>
+                <li>li2</li>
+            </ul>
+            <div>asd</div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td data-row="1"><br><ul>
+                <li>table li1</li>
+                <li>table li2</li>
+            </ul></td>
+                        <td data-row="1"><br></td>
+                    </tr>
+                    <tr>
+                        <td data-row="2"><br></td>
+                        <td data-row="2"><br></td>
+                    </tr>
+                </tbody>
+            </table>
+        `);
+    </script>
+</body>
+
+</html>
