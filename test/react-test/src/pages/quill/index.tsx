@@ -5,7 +5,6 @@ import { useEffect, useRef } from 'react';
 import Toolbar from './Toolbar';
 
 
-
 export default function IndexPage() {
   const quillInstance = useRef<Quill>();
   useEffect(() => {
