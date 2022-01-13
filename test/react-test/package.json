@@ -22,6 +22,7 @@
   "dependencies": {
     "@ant-design/pro-layout": "^6.5.0",
     "quill": "^2.0.0-dev.4",
+    "quill-better-table": "^1.2.10",
     "react": "17.x",
     "react-dom": "17.x",
     "umi": "^3.5.20"
