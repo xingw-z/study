@@ -5,9 +5,11 @@ import { useEffect, useRef } from 'react';
 import Toolbar from './Toolbar';
 import QuillBetterTable from 'quill-better-table';
 import DivBlot from './div-blot';
+import TableUl from './table-ul';
 import 'quill-better-table/dist/quill-better-table.css';
 
-Quill.register(DivBlot, true)
+Quill.register(DivBlot, true);
+Quill.register(TableUl, true);
 
 Quill.register({
   'modules/better-table': QuillBetterTable
@@ -55,29 +57,31 @@ export default function IndexPage() {
   );
 }
 
-const testHtml = `
-<div class="div-blot">div-blot</div>
-<div>div-blot2</div>
-`
-
 // const testHtml = `
-// <table class="quill-better-table" style="width: 172px;">
-//   <tbody>
-//     <tr>
-//       <td>
-//         123
-//       </td>
-//       <td >
-//       </td>
-//     </tr>
-//     <tr>
-//       <td>
-//         123
-//       </td>
-//       <td >
-//         dd
-//       </td>
-//     </tr>
-//   </tbody>
-// </table>
+// <div class="div-blot">div-blot</div>
 // `
+
+const testHtml = `
+<table class="quill-better-table" style="width: 172px;">
+  <tbody>
+    <tr>
+      <td>
+        <ul>
+          <li>li111</li>
+          <li>li222</li>
+        </ul>
+      </td>
+      <td >
+      </td>
+    </tr>
+    <tr>
+      <td>
+        123
+      </td>
+      <td >
+        dd
+      </td>
+    </tr>
+  </tbody>
+</table>
+`
