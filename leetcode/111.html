@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>111. 二叉树的最小深度</title>
+</head>
+<body>
+  <script>
+    var minDepth = function(root) {
+      if (!root) {
+        return 0;
+      }
+      if (!root.left && !root.right) {
+        return 1;
+      }
+      let minDepthVal = Number.MAX_SAFE_INTEGER;
+      if (root.left) {
+        minDepthVal = Math.min(minDepthVal, minDepth(root.left))
+      }
+      if (root.right) {
+        minDepthVal = Math.min(minDepthVal, minDepth(root.right))
+      }
+      return minDepthVal + 1;
+    };
+  </script>
+</body>
+</html>

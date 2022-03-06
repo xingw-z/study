@@ -13,7 +13,7 @@
   var inorderTraversal = function(root) {
     const list = [];
     function recursion(node) {
-      if (!node.val) {
+      if (!node) {
         return
       }
       recursion(node.left);
