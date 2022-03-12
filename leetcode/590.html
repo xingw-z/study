@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>590. N 叉树的后序遍历</title>
+</head>
+<body>
+  <script>
+    // var postorder = function(root) {
+    //   if (!root) {
+    //     return []
+    //   }
+    //   const list = [];
+    //   if (root.children && root.children.length) {
+    //     for (let i = 0, len = root.children.length; i < len; i++) {
+    //       list.push(...postorder(root.children[i]))
+    //     }
+    //   } 
+    //   list.push(root.val)
+    //   return list
+    // };
+
+    var postorder = function(root) {
+      const res = [];
+      if (root == null) {
+          return res;
+      }
+      const map = new Map();
+      const stack = [];
+      let node = root;
+      while (stack.length || node) {
+          while (node) {
+              stack.push(node);
+              const children = node.children;
+              if (children && children.length > 0) {
+                  map.set(node, 0);
+                  node = children[0];
+              } else {
+                  node = null;
+              }
+          }
+          node = stack[stack.length - 1];
+          const index = (map.get(node) || 0) + 1;
+          const children = node.children;
+          if (children && children.length > index) {
+              map.set(node, index);
+              node = children[index];
+          } else {
+              res.push(node.val);
+              stack.pop();
+              map.delete(node);
+              node = null;
+          }
+      }
+      return res;
+  };
+
+  function Node(val,children) {
+    this.val = val;
+    this.children = children;
+  };
+  const node5 = new Node(5, null)
+  const node6 = new Node(6, null)
+  const node2 = new Node(2, null)
+  const node4 = new Node(4, null)
+  const node3 = new Node(3, [node5,node6])
+  const node1 = new Node(1, [node3,node2,node4])
+  debugger
+  console.log(postorder(node1));
+
+  </script>
+</body>
+</html>
