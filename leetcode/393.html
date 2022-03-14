@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>393. UTF-8 编码验证</title>
+</head>
+<body>
+  <script>
+    // var decimalToBinary = function(num) {
+    //     let str = '';
+    //     while(num) {
+    //       const mid = num / 2
+    //       const next = Math.floor(mid)
+    //       let reNum = 0
+    //       if (mid > next) {
+    //         reNum = 1
+    //       }
+    //       str = reNum + str
+    //       num = next
+    //     }
+    //     const len = 8 - str.length
+    //     for (let i = 0; i < len; i++) {
+    //       str = '0' + str 
+    //     }
+    //     return str
+    //   }
+    // var validUtf8 = function(data) {
+    //   let isByte = false
+    //   let x = 0
+    //   for (let i = 0, len = data.length; i < len; i++) {
+    //     const item = data[i]
+    //     const binary = decimalToBinary(item)
+    //     console.log(binary, 'binary');
+    //     if (isByte) {
+    //       if (+binary[0] === 1 && +binary[1] === 0) {
+    //         x--
+    //         if (x === 0) {
+    //           isByte = false
+    //         }
+    //         continue
+    //       } else {
+    //         return false
+    //       }
+    //     } else {
+    //       if (+binary[0] > 0) {
+    //         isByte = true
+    //         for (let j = 0, jLen = binary.length; j < jLen; j++) {
+    //           const jItem = binary[j];
+    //           if (+jItem === 0) {
+    //             x--
+    //             break
+    //           } else {
+    //             x++
+    //             if (x > 4) {
+    //               return false
+    //             }
+    //           }
+    //         }
+    //       } else {
+    //         isByte = false
+    //         x = 0
+    //       }
+    //     }
+        
+    //   }
+    //   return !isByte
+    // };
+    const MASK1 = 1 << 7;
+    const MASK2 = (1 << 7) + (1 << 6);
+
+    var validUtf8 = function(data) {
+        const m = data.length;
+        let index = 0;
+        while (index < m) {
+            const num = data[index];
+            const n = getBytes(num);
+            if (n < 0 || index + n > m) {
+                return false;
+            }
+            for (let i = 1; i < n; i++) {
+                if (!isValid(data[index + i])) {
+                    return false;
+                }
+            }
+            index += n;
+        }
+        return true;
+    };
+
+    const getBytes = (num) => {
+        if ((num & MASK1) === 0) {
+            return 1;
+        }
+        let n = 0;
+        let mask = MASK1;
+        while ((num & mask) !== 0) {
+            n++;
+            if (n > 4) {
+                return -1;
+            }
+            mask >>= 1;
+        }
+        return n >= 2 ? n : -1;
+    }
+
+    const isValid = (num) => {
+        return (num & MASK2) === MASK1;
+    }
+    console.log(validUtf8([250,145,145,145,145]));
+  </script>
+  
+</body>
+</html>
