@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>954. 二倍数对数组</title>
+</head>
+<body>
+  
+</body>
+<script>
+  var canReorderDoubled = function(arr) {
+    const hash = {}
+    for (let i = 0, len = arr.length; i < len; i++) {
+      const item = arr[i]
+      hash[item] = (hash[item] ?? 0) + 1
+    }
+    if ((hash[0] ?? 0) % 2 !== 0) {
+      return false
+    }
+    list = Object.keys(hash)
+    list = list.sort((x, y) => {
+      return Math.abs(x) - Math.abs(y)
+    });
+    for (let i = 0, len = list.length; i < len; i++) {
+      const item = list[i]
+      if (hash[item] > (hash[item * 2] ?? 0)) {
+        return false
+      }
+      hash[2 * item] = (hash[2 * item] ?? 0) - hash[item]
+    }
+    return true
+};
+console.log(canReorderDoubled([2,1,2,1,1,1,2,2]));
+</script>
+</html>
