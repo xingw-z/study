@@ -25,10 +25,25 @@
     //     return num
     // };
     // 抄答案的
-    var maxDepth = function (root) {
-        if (root === null) return 0
-        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1
+    // var maxDepth = function (root) {
+    //     if (root === null) return 0
+    //     return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1
+    // };
+    
+    var canJump = function(nums) {
+        let max = 0
+        for (let i = 0, len = nums.length; i < len; i++) {
+            const item = nums[i]
+            if (i <= max) {
+                max = Math.max(max, i + item)
+                if (max >= nums.length - 1) {
+                    return true
+                }
+            }
+        }
+        return false
     };
+    console.log(canJump([1,1,1,0]));
 </script>
 
 </html>
