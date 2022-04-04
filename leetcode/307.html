@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>307</title>
+</head>
+<body>
+  <script>
+    var NumArray = function(nums) {
+      this.nums = nums
+      const len = nums.length
+      this.size = Math.floor(Math.sqrt(len))
+      this.sum = new Array(Math.ceil(len / this.size)).fill(0)
+      for (let i = 0; i < len; i++) {
+        this.sum[Math.floor(i / this.size)] = this.nums[i] + this.sum[Math.floor(i / this.size)]
+      }
+    };
+
+    NumArray.prototype.update = function(index, val) {
+      this.sum[Math.floor(index / this.size)] = this.sum[Math.floor(index / this.size)] + val - this.nums[index]
+      this.nums[index] = val
+    };
+
+    NumArray.prototype.sumRange = function(left, right) {
+      const leftIndex = Math.floor(left / this.size)
+      const rightIndex = Math.floor(right / this.size)
+      if (leftIndex === rightIndex) {
+        return this.nums.slice(left, right + 1).reduce((a, b) => a + b, 0)
+      } else {
+        let leftSum = 0
+        const leftSize = left % this.size
+        const rightSize = right % this.size
+        for (let i = leftSize; i < this.size; i++) {
+          leftSum = leftSum + this.nums[leftIndex * this.size + i]
+        }
+        let midSum = 0
+        for (let i = leftIndex + 1; i < rightIndex; i++) {
+          midSum = midSum + this.sum[i]
+        }
+        let rightSum = 0
+        for (let i = 0; i <= rightSize; i++) {
+          rightSum = rightSum + this.nums[i + rightIndex * this.size]
+        }
+        return leftSum + midSum + rightSum
+      }
+    };
+
+    const a = new NumArray([0,9,5,7,3])
+    console.log(a.sumRange(2, 4))
+    // a.update(1,2)
+    // a.sumRange(0, 2)
+
+  </script>
+</body>
+</html>
