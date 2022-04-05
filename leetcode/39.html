@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>39</title>
+</head>
+<body>
+  <script>
+    var combinationSum = function(candidates, target) {
+      const result = [];
+      const cb = (target, temp, idx) => {
+        if (idx === candidates.length) {
+          return
+        }
+        if (target === 0) {
+            result.push(temp);
+            return;
+        }
+        cb(target, temp, idx + 1)
+        if (target - candidates[idx] >= 0) {
+          cb(target - candidates[idx], [...temp, candidates[idx]], idx)
+        }
+      }
+      cb(target, [], 0)
+      return result
+    };
+    
+
+    console.log(combinationSum([2,3,6,7], 7));
+    
+  </script>
+</body>
+</html>
