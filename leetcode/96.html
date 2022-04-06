@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>96</title>
+</head>
+<body>
+  <script>
+    var numTrees = function(n) {
+      const nodeList = [
+        1, 1, 2, 5
+      ]
+      if (n <= 3) {
+        return nodeList[n]
+      }
+      for (let i = 4; i <= n; i++) {
+        let sum = 0
+        for (let j = 1; j <= i; j++) {
+          sum = sum + nodeList[j - 1] * nodeList[i - j]
+        }
+        nodeList[i] = sum
+      }
+      return nodeList[n]
+    };
+    console.log(numTrees(4));
+    
+  </script>
+</body>
+</html>
