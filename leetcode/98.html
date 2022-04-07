@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>98</title>
+</head>
+<body>
+  <script>
+    function TreeNode(val, left, right) {
+      this.val = (val===undefined ? 0 : val)
+      this.left = (left===undefined ? null : left)
+      this.right = (right===undefined ? null : right)
+    }
+    const a = new TreeNode(2)
+    const b = new TreeNode(1)
+    const c = new TreeNode(3)
+    a.left = b
+    a.right = c
+    var cb = function(node, lower, upper) {
+      if (!node || node.val === null) {
+        return true
+      }
+      if (node.val >= upper || node.val <= lower) {
+        return false
+      }
+      return cb(node.left, lower, node.val) && cb(node.right, node.val, upper)
+    }
+    var isValidBST = function(root) {
+      return cb(root, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER)
+    };
+    console.log(isValidBST(a));
+  </script>
+</body>
+</html>
