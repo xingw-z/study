@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>103</title>
+</head>
+<body>
+  <script>
+
+function TreeNode(val, left, right) {
+      this.val = (val===undefined ? 0 : val)
+      this.left = (left===undefined ? null : left)
+      this.right = (right===undefined ? null : right)
+  }
+
+  var a1 = new TreeNode(1)
+  var a2 = new TreeNode(2)
+  var a3 = new TreeNode(3)
+  var a4 = new TreeNode(4)
+  var a5 = new TreeNode(5)
+  a1.left = a2
+  a1.right = a3
+  a2.left = a4
+  a3.right = a5
+    var zigzagLevelOrder = function(root) {
+      const list = []
+      const cb = (node, idx) => {
+        if (!node || (node.val === undefined || node.val === null)) {
+          return
+        }
+        if (!list[idx]) {
+          list[idx] = []
+        }
+        if (idx % 2 === 0) {
+          list[idx].push(node.val)
+        } else {
+          list[idx].unshift(node.val)
+        }
+        cb(node.left, idx + 1)
+        cb(node.right, idx + 1)
+      }
+      cb(root, 0)
+      return list
+    };
+    console.log(zigzagLevelOrder(a1));
+  </script>
+</body>
+</html>
