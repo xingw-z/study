@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>59</title>
+</head>
+<body>
+  <script>
+    var generateMatrix = function(n) {
+      const list = new Array(n).fill(0).map(() => new Array(n).fill(0))
+      let x = 0
+      let y = 0
+      let c = 0
+      let idx = 1
+      let target = 'right'
+      for (let i = 0, len = list.length; i < len; i++) {
+        const item = list[i]
+        for (let j = 0, jLen = item.length; j < jLen; j++) {
+          if (target === 'right') {
+            list[x][y] = idx
+            y++ 
+          } else if (target === 'down') {
+            list[x][y] = idx
+            x++
+          } else if (target === 'left') {
+            list[x][y] = idx
+            y--
+          } else if (target === 'up') {
+            list[x][y] = idx
+            x--
+          }
+
+          idx++
+          if (y >= (n - c) && target === 'right') {
+            target = 'down'
+            x = c + 1
+            y--
+          } else if (x >= (n - c) && target === 'down') {
+            target = 'left'
+            y = n - c - 2
+            x--
+          } else if (target === 'left' && y < c) {
+            target = 'up'
+            y = c
+            x--
+          } else if (target === 'up' && x < (c + 1)) {
+            target = 'right'
+            x = c + 1
+            y = c + 1
+            c++
+          }
+        }
+      }
+      return list
+    };
+    console.log(generateMatrix(5));
+  </script>
+</body>
+</html>
