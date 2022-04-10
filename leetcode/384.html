@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>384</title>
+</head>
+<body>
+  <script>
+    var Solution = function(nums) {
+      this.initNums = [...nums]
+      this.nums = nums
+    };
+
+    /**
+    * @return {number[]}
+    */
+    Solution.prototype.reset = function() {
+      this.nums = [...this.initNums]
+      return [...this.nums]
+    };
+
+    /**
+    * @return {number[]}
+    */
+    Solution.prototype.shuffle = function() {
+      const nums = [...this.nums]
+      const len = nums.length
+      for (let i = 0; i < len; i++) {
+        const randomIdx = Math.floor(Math.random() * (len - i)) + i
+        let temp = nums[i]
+        nums[i] = nums[randomIdx]
+        nums[randomIdx] = temp
+      }
+      return nums
+    };
+    
+    var solution = new Solution([1, 2, 3]);
+    console.log(solution.shuffle());
+
+  </script>
+</body>
+</html>
