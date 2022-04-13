@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>95</title>
+</head>
+<body>
+  <script>
+    function TreeNode(val, left, right) {
+      this.val = (val===undefined ? 0 : val)
+      this.left = (left===undefined ? null : left)
+      this.right = (right===undefined ? null : right)
+  }
+    var generateTrees = function(n) {
+      if (n === 0) {
+        return []
+      }
+
+      const memo = new Map()
+      const cb = function(start, end) {
+        const res = []
+        if (start > end) {
+          res.push(null)
+          return res
+        }
+        const memoKey = `${start}-${end}`
+        if (memo.has(memoKey)) {
+          return memo.get(memoKey)
+        }
+        for (let i = start; i <= end; i++) {
+          const leftNode = cb(start, i - 1)
+          const rightNode = cb(i + 1, end)
+          for (let left of leftNode) {
+            for (let right of rightNode) {
+              res.push(new TreeNode(i, left, right))
+            }
+          }
+        }
+        memo.set(memoKey, res)
+        return res
+      }
+      return cb(1, n)
+    };
+    console.log(generateTrees(3));
+  </script>
+</body>
+</html>
