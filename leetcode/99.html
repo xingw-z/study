@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>99</title>
+</head>
+<body>
+    <script>
+        var recoverTree = function(root) {
+        const result = []
+        const cb = (node) => {
+            if (!node || (!node.val && node.val !== 0)) {
+                return 
+            }
+            cb(node.left)
+            result.push(node)
+            cb(node.right)
+        }
+        cb(root)
+        let left = 0
+        let right = result.length - 1
+        let leftFlag = false
+        let rightFlag = false
+        while (left < right) {
+            if (result[left]?.val > result[left + 1]?.val) {
+                leftFlag = true
+            }
+            if (result[right - 1]?.val > result[right]?.val) {
+                rightFlag = true
+            }
+            if (leftFlag && rightFlag) {
+                break
+            } else if (leftFlag) {
+                right--
+            } else if (rightFlag) {
+                left++
+            } else {
+                right--
+                left++
+            }
+        }
+        const temp = result[left].val
+        result[left].val = result[right].val
+        result[right].val = temp
+        return root
+    };
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>148</title>
+</head>
+<body>
+  <script>
+    function ListNode(val, next) {
+      this.val = (val===undefined ? 0 : val)
+      this.next = (next===undefined ? null : next)
+    }
+    var a1 = new ListNode(1)
+    var a2 = new ListNode(2)
+    var a3 = new ListNode(3)
+    var a4 = new ListNode(4)
+    a4.next = a2
+    a2.next = a1
+    a1.next = a3
+    var sortList = function(head) {
+      if (!head) {
+        return head
+      }
+      const list = []
+      while (head && (head.val !== null)) {
+        list.push({
+          val: head.val,
+          node: head
+        })
+        head = head.next
+      }
+      list.sort((x, y) => x.val - y.val)
+      for (let i = 0, len = list.length; i < len; i++) {
+        if (i === len - 1) {
+          list[i].node.next = null
+        } else {
+          list[i].node.next = list[i + 1].node
+        }
+      }
+      return list[0].node
+    };
+    console.log(sortList(a4));
+  </script>
+</body>
+</html>
