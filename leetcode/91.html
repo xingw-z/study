@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>91</title>
+</head>
+<body>
+  <script>
+    var numDecodings = function(s) {
+      const len = s.length
+      if (s[0] === '0') {
+        return 0
+      }
+      const dp = new Array(len + 1).fill(0)
+      dp[0] = 1
+      // 其实跟爬楼梯一样 前一个 加 前第二个的次数 只是这个是有条件的判断
+      // 一是为 0 就为空 二是看在 1 和 26之间吗
+      // 而且这里多加了一位 从 1 开始 就算当前为 0 当前有值 最后一位肯定为 0 除非这个 0 的位置比较好 也和 1 2 组成 10 20
+      for (let i = 1; i <= len; i++) {
+        if (s[i - 1] !== '0') {
+          dp[i] = dp[i] + dp[i - 1]
+        }
+        if (i > 1 && s[i - 2] !== '0') { 
+          const num = +(s[i - 2] + s[i - 1])
+          if (num >= 1 && num <= 26) {
+            dp[i] = dp[i] + dp[i - 2]
+          }
+        }
+      }
+      return dp[len]
+    };
+    console.log(numDecodings('606'));
+  </script>
+</body>
+</html>
