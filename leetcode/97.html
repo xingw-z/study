@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>97</title>
+</head>
+<body>
+  <script>
+    var isInterleave = function(s1, s2, s3) {
+      const s1len = s1.length
+      const s2len = s2.length
+      const s3len = s3.length
+      if ((s1len + s2len) !== s3len) {
+        return false
+      }
+      const dp = new Array(s1len + 1).fill(0).map(() => new Array(s2len + 1).fill(false))
+      dp[0][0] = true
+      for (let i = 0; i < s1len + 1; i++) {
+        for (let j = 0; j < s2len + 1; j++) {
+          const p = i + j - 1
+          if (i > 0) {
+            dp[i][j] = dp[i][j] || (s1[i - 1] === s3[p] && dp[i - 1][j])
+          }
+          if (j > 0) {
+            dp[i][j] = dp[i][j] || (s2[j - 1] === s3[p] && dp[i][j - 1])
+          }
+        }
+      }
+      return dp[s1len][s2len]
+    };
+    console.log(isInterleave('aabcc', 'dbbca', 'aadbbcbcac'));
+  </script>
+</body>
+</html>
