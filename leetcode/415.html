@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>415</title>
+</head>
+<body>
+  <script>
+    var addStrings = function(num1, num2) {
+      const len1 = num1.length
+      const len2 = num2.length
+      let num = ''
+      let addOne = false
+      const minLen = Math.min(len2, len1)
+      const maxNum = len1 > len2 ? num1 : num2
+      for (let i = 0; i < minLen; i++) {
+        const idx1 = len1 - 1 - i
+        const idx2 = len2 - 1 - i
+        let result = +num1[idx1] + +num2[idx2] + (addOne ? 1 : 0)
+        if (result >= 10) {
+          result = result % 10
+          addOne = true
+        } else {
+          addOne = false
+        }
+        num = `${result}${num}`
+      }
+      if (addOne) {
+        const str = maxNum.slice(0, maxNum.length -  minLen)
+        let strIdx = str.length - 1
+        while(addOne && strIdx >= 0) {
+          let result = +str[strIdx] + 1
+          if (result >= 10) {
+            result = result % 10
+            addOne = true
+          } else {
+            addOne = false
+          }
+          num = `${result}${num}`
+          strIdx--
+        }
+        if (addOne) {
+          num = `1${num}`
+        }else if (strIdx >= 0) {
+          num = `${maxNum.slice(0, strIdx + 1)}${num}`
+        }
+      } else {
+        num =  `${maxNum.slice(0, maxNum.length -  minLen)}${num}`
+      }
+      return num
+    };
+    console.log(addStrings('408', '5'));
+  </script>
+</body>
+</html>

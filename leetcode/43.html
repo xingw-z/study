@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>43</title>
+</head>
+<body>
+  <script>
+    var addStrings = function(num1, num2) {
+      let idx1 = num1.length - 1
+      let idx2 = num2.length - 1
+      let isAdd = false
+      let sum = ''
+      while (idx1 >= 0 || idx2 >=0 || isAdd) {
+        const item1 = num1[idx1] ? +num1[idx1] : 0
+        const item2 = num2[idx2] ? +num2[idx2] : 0
+        const addOne = isAdd ? 1 : 0
+        let result = item1 + item2 + addOne
+        if (result >= 10) {
+          isAdd = true
+        } else {
+          isAdd = false
+        }
+        sum = `${result % 10}${sum}`
+        idx2--
+        idx1--
+      }
+      return sum
+    };
+    var multiply = function(num1, num2) {
+      if (num2 === '0' || num1 === '0') {
+        return '0'
+      }
+      const len1 = num1.length;
+      const len2 = num2.length;
+      let sum = '0'
+      for (let i = len1 - 1; i >=0; i--) {
+        let item = '0'
+        for (let j = len2 - 1; j >= 0; j--) {
+          item = addStrings((+num1[i] * +num2[j]) + new Array(len2 - j - 1).fill('0').join(''), item)
+        }
+        item = `${item}${new Array(len1 - i - 1).fill('0').join('')}`
+        sum = addStrings(sum, item)
+      }
+      return sum
+    };
+    console.log(multiply('123', '456'));
+  </script>
+</body>
+</html>
