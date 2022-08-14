@@ -1,7 +1,11 @@
-var http = require('http');
-http.createServer(function (req, res) {
-    res.end('asd');
-}).listen(8080);
+var fs = require('fs');
 
-var querystring = require('querystring');
-console.log(JSON.stringify(querystring))
+var rs = fs.createReadStream('test.md', { highWaterMark: 11});
+rs.setEncoding('utf8');
+var data = '';
+rs.on("data", function (chunk){
+    data += chunk; 
+});
+rs.on("end", function () { 
+    console.log(data);
+});
