@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1954. 收集足够苹果的最小花园周长</title>
+    <style>
+        div.j {
+            border: 1px solid #000;
+            width: 50px;
+            height: 50px;
+        }
+        div.i {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+    </div>
+    <script>
+        const container = document.querySelector('.container');
+        const maxVal = 8;
+        const center = Math.floor(maxVal / 2);
+        for (let i = 0; i < maxVal; i++) {
+            const iDiv = document.createElement('div');
+            iDiv.classList.add('i')
+            for (let j = 0; j < maxVal; j++) {
+                const jDiv = document.createElement('div');
+                jDiv.classList.add('j')
+                jDiv.innerHTML = `${i - center}, ${j - center}`;
+                iDiv.appendChild(jDiv);
+            }
+            container.appendChild(iDiv);
+        }
+        document.body.appendChild(container);
+    </script>
+    <script>
+        /**
+         * @param {number} neededApples
+         * @return {number}
+         */
+        var minimumPerimeter = function(neededApples) {
+            const list = [0, 12];
+            let numLayers = 1;
+            if (neededApples > list[numLayers]) {
+                while (neededApples > list[numLayers]) {
+                    numLayers++;
+                    list.push(12 * numLayers * numLayers + list[numLayers - 1]);
+                }
+            }
+            return numLayers * 2 * 4;
+        };
+        console.log(minimumPerimeter(1000000000));
+    </script>
+</body>
+</html>
