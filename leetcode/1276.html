@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1276. 不浪费原料的汉堡制作方案</title>
+</head>
+<body>
+    <script>
+        /**
+         * @param {number} tomatoSlices
+         * @param {number} cheeseSlices
+         * @return {number[]}
+         */
+        var numOfBurgers = function(tomatoSlices, cheeseSlices) {
+            if (tomatoSlices % 2 !== 0 || tomatoSlices < 2 * cheeseSlices || tomatoSlices > 4 * cheeseSlices) {
+                return [];
+            }
+            let count_t = tomatoSlices;
+            let count_c = cheeseSlices;
+            let total_jumbo = 0;
+            while (count_t > 2 * count_c && count_t < 4 * count_c && count_c > 0 && count_t > 0) {
+                total_jumbo++;
+                count_t = count_t - 4;
+                count_c = count_c - 1;
+            }
+            if (count_t === 2 * count_c) {
+                return [total_jumbo, count_c];
+            } else {
+                return [];
+            }
+        };
+        console.log(numOfBurgers(2, 1));
+    </script>
+</body>
+</html>
