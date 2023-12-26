@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1282. 用户分组</title>
+</head>
+<body>
+    <script>
+        var sliceList = function(originalArray, chunkSize) {
+            const chunkedArrays = [];
+            for (let i = 0; i < originalArray.length; i += chunkSize) {
+                const chunk = originalArray.slice(i, i + chunkSize);
+                chunkedArrays.push(chunk);
+            }
+            return chunkedArrays
+        }
+        /**
+         * @param {number[]} groupSizes
+         * @return {number[][]}
+         */
+        var groupThePeople = function(groupSizes) {
+            const list = [];
+            for  (let i = 0, len = groupSizes.length; i < len; i++) {
+                const item = groupSizes[i];
+                if (list[item]?.length) {
+                    list[item].push(i);
+                } else {
+                    list[item] = [i];
+                }      
+            }
+            const result = [];
+            for (let i = 0, len = list.length; i < len; i++) {
+                const item = list[i];
+                if (item?.length) {
+                    result.push(...sliceList(item, i));
+                }
+            }
+            return result;
+        };
+        console.log(groupThePeople( [3,3,3,3,3,1,3]));
+    </script>
+</body>
+</html>
