@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2661. 找出叠涂元素</title>
+</head>
+<body>
+    <script>
+        /**
+         * @param {number[]} arr
+         * @param {number[][]} mat
+         * @return {number}
+         */
+        var firstCompleteIndex = function(arr, mat) {
+            const xLen = mat[0].length;
+            const yLen = mat.length;
+            const objIndex = {};
+            const objLine = {}
+            for (let i = 0, iLen = mat.length; i < iLen; i++) {
+                const item = mat[i];
+                for(let j = 0, jLen = item.length; j < jLen; j++) {
+                    const jItem = item[j];
+                    objIndex[jItem] = {
+                        x: i,
+                        y: j,
+                    };
+                    objIndex[`${i}-${j}`] = jItem;
+                    if (i === 0) {
+                        objLine[`y-${j}`] = 0;
+                    }
+                }
+                objLine[`x-${i}`] = 0;
+            }
+            for (let i = 0, iLen = arr.length; i < iLen; i++) {
+                const item = arr[i];
+                const x = objIndex[item].x;
+                const y = objIndex[item].y;
+                objLine[`x-${x}`] = objLine[`x-${x}`] + 1;
+                objLine[`y-${y}`] = objLine[`y-${y}`] + 1;
+                if (objLine[`x-${x}`]  > xLen - 1 || objLine[`y-${y}`] > yLen - 1) {
+                    return i;
+                }
+            }
+        };
+        console.log(firstCompleteIndex([2,8,7,4,1,3,5,6,9], [[3,2,5],[1,4,6],[8,7,9]]));
+    </script>
+</body>
+</html>
