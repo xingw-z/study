@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>189</title>
+</head>
+<body>
+    <script>
+        var rotate = function(nums, k) {
+            const len = nums.length;
+            k = k % len;
+            const before = [];
+            const after = [];
+            for (let i = 0; i < len; i++) {
+                if ((i + 1 + k) > len) {
+                    before.push(nums[i]);
+                } else {
+                    after.push(nums[i]);
+                }
+            }           
+            before.concat(after).forEach((item, index) => {
+                nums[index] = item;
+            })
+            return nums;
+        };
+
+        console.log(rotate([1,2,3,4,5,6,7], 3));
+        
+    </script>
+</body>
+</html>
