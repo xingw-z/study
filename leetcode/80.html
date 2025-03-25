@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>80</title>
+</head>
+<body>
+    <script>
+        var removeDuplicates = function(nums) {
+            const hash = {};
+            for (let i = nums.length - 1; i >= 0; i--) {
+                const item = nums[i];            
+                if (hash[item] >= 2) {
+                    nums.splice(i, 1);
+                } else if (!hash[item]) {
+                    hash[item] = 1;
+                } else {
+                    hash[item] = hash[item] + 1;
+                }
+            }
+            return nums;
+        };
+
+        console.log(removeDuplicates([1,1,1,2,2,3]));
+        
+    </script>
+</body>
+</html>
