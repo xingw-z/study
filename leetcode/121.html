@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>121</title>
+</head>
+<body>
+    <script>
+        var maxProfit = function(prices) {
+            let min = Number.MAX_SAFE_INTEGER;
+            let money = 0;
+            prices.forEach((price) => {
+                const newMoney = price - min;
+                if (newMoney > money) {
+                    money = newMoney;
+                }
+                if (price < min) {
+                    min = price;
+                }
+            });
+            return money;
+        };
+
+        console.log(maxProfit([7,6,4,3,1]));
+
+        
+    </script>
+</body>
+</html>
