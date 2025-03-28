@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>380</title>
+</head>
+<body>
+    <script>
+        
+    var RandomizedSet = function() {
+        this.list = [];
+    };
+
+    /** 
+     * @param {number} val
+     * @return {boolean}
+     */
+    RandomizedSet.prototype.insert = function(val) {
+        const isHas = this.list.findIndex(item => item === val) !== -1;
+        if (isHas) {
+            return false;
+        } else {
+            this.list.push(val);
+            return true;
+        }
+    };
+
+    /** 
+     * @param {number} val
+     * @return {boolean}
+     */
+    RandomizedSet.prototype.remove = function(val) {
+        const index = this.list.findIndex(item => item === val);
+        if (index !== -1) {
+            this.list.splice(index, 1);
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    /**
+     * @return {number}
+     */
+    RandomizedSet.prototype.getRandom = function() {
+        return this.list[Math.floor(Math.random() * this.list.length)]
+    };
+
+    /** 
+     * Your RandomizedSet object will be instantiated and called as such:
+     * var obj = new RandomizedSet()
+     * var param_1 = obj.insert(val)
+     * var param_2 = obj.remove(val)
+     * var param_3 = obj.getRandom()
+     */
+
+    var a = new RandomizedSet();
+    console.log(a.insert(1));
+    console.log(a.remove(2));
+    console.log(a.insert(2));
+    console.log(a.getRandom());
+    console.log(a.remove(1));
+    console.log(a.insert(2));
+    console.log(a.getRandom());
+    console.log(a);
+    
+
+    </script>
+</body>
+</html>
