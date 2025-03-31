@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>238</title>
+</head>
+<body>
+    <script>
+        var productExceptSelf = function(nums) {
+            const leftList = [];
+            const rightList = [];
+            const len = nums.length;
+            const result = [];
+            for (let i = 0; i < len; i++) {
+                if (i === 0) {
+                    leftList.push(nums[i]);
+                } else {
+                    leftList.push(leftList[i - 1] * nums[i]);
+                }
+            }
+            for (let i = len - 1; i >= 0; i--) {
+                if (i === (len - 1)) {
+                    rightList.unshift(nums[i]);
+                } else {
+                    rightList.unshift(rightList[0] * nums[i]);
+                }
+            }
+            
+            for (let i = 0; i < len; i++) {
+                if (i === 0) {
+                    result.push(rightList[1]);
+                } else if (i === (len - 1)) {
+                    result.push(leftList[len - 2]);
+                } else {
+                    result.push(leftList[i - 1] * rightList[i + 1]);
+                }
+            }
+
+            return result;
+            
+        };
+
+        console.log(productExceptSelf([1,2,3,4]));
+        
+    </script>
+</body>
+</html>
