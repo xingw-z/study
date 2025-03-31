@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>134</title>
+</head>
+<body>
+    <script>
+        var canCompleteCircuit = function(gas, cost) {
+            const len = gas.length;
+            if (len <= 1) {
+                if (gas[0] < cost[0]) {
+                    return -1
+                } else {
+                    return 0
+                }
+            }
+
+            let i = 0;
+            while (i < len) {
+                let sumGas = 0;
+                let sumCost = 0;
+                let cnt = 0;
+                while (cnt < len) {
+                    const j = (i + cnt) % len;
+                    sumGas = sumGas + gas[j];
+                    sumCost = sumCost + cost[j];
+                    if (sumCost > sumGas) {
+                        break;
+                    }
+                    cnt++;
+                }
+
+                if (cnt >= len) {
+                    return i
+                } else {
+                    i = i + cnt + 1;
+                }
+            }
+            return -1;
+        };
+
+        console.log(canCompleteCircuit([2,3,4], [3,4,3]));
+        
+    </script>
+</body>
+</html>
