@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>151</title>
+</head>
+<body>
+    <script>
+        var reverseWords = function(s) {
+            function reverseString(str) {
+                return str.split("").reverse().join("");
+            }
+            const len = s.length;
+            s = reverseString(s);
+            const list = [];
+            let text = "";
+            for (let i = 0; i < len; i++) {
+                const item = s[i];
+                if (item === " ") {
+                    if (text) {
+                        list.push(text);
+                    }
+                    text = "";
+                } else {
+                    text = item + text;
+                }
+            }
+            if (text) {
+                list.push(text);
+            }
+            return list.join(" ");
+        };
+
+        console.log(reverseWords("the sky is blue"));
+        console.log(reverseWords("  hello world  "));
+        console.log(reverseWords("a good   example"));
+    </script>
+</body>
+</html>
