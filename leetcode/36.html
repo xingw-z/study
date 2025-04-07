@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>36</title>
+</head>
+<body>
+    <script>
+        var isValidSudoku = function(board) {
+            const hang = new Array(9).fill(0).map(() => new Array(9).fill(0));
+            const lie = new Array(9).fill(0).map(() => new Array(9).fill(0));
+            const jiu = new Array(3).fill(0).map(() => new Array(3).fill(0).map(() => new Array(9).fill(0)));
+
+            for (let i = 0; i < 9; i++) {
+                for (let j = 0; j < 9; j++) {
+                    const item = board[i][j] - 1;
+                    if (item !== '.') {
+                        hang[i][item]++;
+                        lie[j][item]++;
+                        jiu[Math.floor(i / 3)][Math.floor(j / 3)][item]++;
+                        if (hang[i][item] > 1 || lie[j][item] > 1 || jiu[Math.floor(i / 3)][Math.floor(j / 3)][item] > 1) {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
+        };
+
+        console.log(isValidSudoku([["5","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]));
+        
+    </script>
+</body>
+</html>
